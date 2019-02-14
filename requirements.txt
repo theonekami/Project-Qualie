@@ -1,0 +1,6 @@
+
+requests
+git+https://github.com/Rapptz/discord.py@rewrite
+openpyxl
+motor
+dnspython
