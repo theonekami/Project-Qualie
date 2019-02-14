@@ -58,7 +58,7 @@ async def on_ready():
 
 @client.event
 async def on_member_join(member):
-    x = client.get_channel(id=377790511353692162)
+    x = client.get_channel(id=531941677351305217)
     y="Hello" + member.mention
     em = discord.Embed(title="New Face")
     em.set_image(url=member.avatar_url)
@@ -181,11 +181,6 @@ async def timer(ctx, *, args):
         return
     await asyncio.sleep(float(args)*60)
     await ctx.send("Timer over"+ ctx.message.author.mention) 
-
-
-
-
-
 
     
 client.run(os.environ["TOKEN"])
