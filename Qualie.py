@@ -180,7 +180,7 @@ async def purge(ctx,args):
     async for i in ctx.channel.history(limit=int(args)+1):
         await i.delete()
     x= await ctx.send("Purged " +args+ " Messages")
-    await asyncio.sleep(20)
+    await asyncio.sleep(5)
     await x.delete()    
 
 
