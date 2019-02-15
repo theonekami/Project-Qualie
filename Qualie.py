@@ -174,7 +174,7 @@ async def timer(ctx, *, args):
     await asyncio.sleep(float(args)*60)
     await ctx.send("Timer over"+ ctx.message.author.mention)
 
-@client.command(aliases=("Purge"))
+@client.command(aliases="Purge")
 @commands.check(basic_check)
 async def purge(ctx,args):
     async for i in ctx.channel.history(limit=int(args)+1):
