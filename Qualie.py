@@ -181,7 +181,7 @@ async def purge(ctx,args):
         await i.delete()
     x= await ctx.send("Purged " +args+ " Messages")
     await asyncio.sleep(20)
-    x.delete()    
+    await x.delete()    
 
 
 
