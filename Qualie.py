@@ -179,7 +179,7 @@ async def timer(ctx, *, args):
 async def purge(ctx,args):
     async for i in ctx.channel.history(limit=int(args)):
         await i.delete()
-    await ctx.send("Purged" +args+ " Messages")
+    await ctx.send("Purged " +args+ " Messages")
 
 
 
