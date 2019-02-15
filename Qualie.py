@@ -28,7 +28,7 @@ def Kami_check(ctx):  ##for funsies
 def basic_check(ctx):  ##for funsies
     p=ctx.author
     for i in p.roles:
-        if i.name=="Moderator":
+        if i.name=="Staff Access":
             return True
     if (p == ctx.guild.owner) or (p.id == 256390874848690176):
         return True
@@ -40,7 +40,7 @@ def basic_check(ctx):  ##for funsies
 
 home=None 
 
-client=commands.Bot( command_prefix=('?', '!','.', 'q ', 'Q ','Qualie '))
+client=commands.Bot( command_prefix=('!','.', 'q ', 'Q ','Qualie '))
 
 
 
@@ -53,7 +53,7 @@ async def on_ready():
 
     await home.send("Quailie reporting in")
 
-    return await client.change_presence(activity=discord.Game(name='My status?'))
+    return await client.change_presence(activity=discord.Game(name="with Sam's chode"))
 
 
 @client.event
@@ -67,8 +67,9 @@ async def on_member_join(member):
 
             
 @client.command()
+@commands.check(basic_check)
 async def hi(ctx):
-    await ctx.send("generic hi message")
+    await ctx.send("Hello Papa!!")
 
 @client.command()
 async def pick(ctx, *, args):
@@ -146,13 +147,6 @@ async def time(ctx):
 
 
 @client.command()
-async def in_guilds(ctx):
-    for i in client.guilds:
-        await ctx.send(i.name)
-
-
-
-@client.command()
 async def rtfm(ctx):
     await ctx.send("https://discordpy.readthedocs.org/en/rewrite")
 
@@ -171,8 +165,6 @@ async def avatar(ctx):
     em.set_image(url=ctx.message.author.avatar_url)
     await ctx.send(embed=em)
 
-
-
 @client.command()
 async def timer(ctx, *, args):
     await ctx.send("Setting timer for " + str(args)+ " min(s)")
@@ -180,7 +172,16 @@ async def timer(ctx, *, args):
         await ctx.send("Stfu and put an actual number u skrub")
         return
     await asyncio.sleep(float(args)*60)
-    await ctx.send("Timer over"+ ctx.message.author.mention) 
+    await ctx.send("Timer over"+ ctx.message.author.mention)
+
+@client.command()
+@commands.check(basic_check)
+async def purge(ctx,args):
+    async for i in ctx.channel.history(limit=int(args)):
+        await i.delete()
+    await ctx.send("Purged" +args+ " Messages")
+
+
 
     
 client.run(os.environ["TOKEN"])
