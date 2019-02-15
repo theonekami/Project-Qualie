@@ -177,9 +177,11 @@ async def timer(ctx, *, args):
 @client.command()
 @commands.check(basic_check)
 async def purge(ctx,args):
-    async for i in ctx.channel.history(limit=int(args)):
+    async for i in ctx.channel.history(limit=int(args)+1):
         await i.delete()
-    await ctx.send("Purged " +args+ " Messages")
+    x= await ctx.send("Purged " +args+ " Messages")
+    await asyncio.sleep(20)
+    x.delete()    
 
 
 
