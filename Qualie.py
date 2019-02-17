@@ -187,7 +187,7 @@ async def purge(ctx,args):
 @client.command()
 async def test(ctx):
     DATABASE_URL = os.environ['DATABASE_URL']
-    conn = await asyncpg.connect('postgresql://postgres@localhost/test')
+    conn = await asyncpg.connect(DATABASE_URL)
     await ctx.send("works")
     await conn.close()
 
