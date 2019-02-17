@@ -181,7 +181,16 @@ async def purge(ctx,args):
         await i.delete()
     x= await ctx.send("Purged " +args+ " Messages")
     await asyncio.sleep(5)
-    await x.delete()    
+    await x.delete()
+
+@client.command()
+async def test(ctx):
+    DATABASE_URL = os.environ['DATABASE_URL']
+    conn = await asyncpg.connect('postgresql://postgres@localhost/test')
+    await ctx.send("works")
+    await conn.close()
+
+
 
 
 
