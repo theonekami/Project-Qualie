@@ -9,6 +9,7 @@ import datetime, json
 import random
 import math
 import requests
+import asyncpg
 
 def value_in_list(ls, val): # ls: a list; val: a value
     for test_value in ls:
