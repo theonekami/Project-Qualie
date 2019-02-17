@@ -189,7 +189,7 @@ async def test(ctx):
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = await asyncpg.connect(DATABASE_URL)
     await conn.execute("""
-                       CREATE TABLE users(
+                       CREATE TABLE items(
                            id serial PRIMARY KEY,
                            name text,
                            disc text,
