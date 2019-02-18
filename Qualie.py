@@ -133,7 +133,7 @@ async def time(ctx):
 
     em.add_field(name="GMT",value=dt.strftime("%T || %D"),inline=False)
     em.add_field(name="GMT- 4",value=a_time.strftime("%T || %D"),inline=False)
-    em.add_field(name="EST",value=est_time.strftime("%T || %D"),inline=False)
+    em.add_field(name="EST",value=est.strftime("%T || %D"),inline=False)
 
     await ctx.send(embed=em)
 
