@@ -126,22 +126,16 @@ async def time(ctx):
     em=discord.Embed(title="Time")
     dt=datetime.datetime.now()
     i_time=dt+datetime.timedelta(hours=5,minutes=30)
-    x_time=dt-datetime.timedelta(hours=5)    
-    singa_time=dt+datetime.timedelta(hours=8)
+    x_time=dt-datetime.timedelta(hours=6)    
     b_time=dt+datetime.timedelta(hours=1)
-    a_time=dt+datetime.timedelta(hours=11)
+    a_time=dt-datetime.timedelta(hours=4)
     est=dt-datetime.timedelta(hours=6)
     utc=dt-datetime.timedelta(hours=8)
 
     em.add_field(name="GMT",value=dt.strftime("%T || %D"),inline=False)
-    em.add_field(name="EST",value=est.strftime("%T || %D"),inline=False)
-    em.add_field(name="BRITAIN",value=b_time.strftime("%T || %D"),inline=False)
-    em.add_field(name="INDIA",value=i_time.strftime("%T || %D"),inline=False)
-    em.add_field(name="SINGAPORE AND PHILPPINES",value=singa_time.strftime("%T || %D"),inline=False)
-    em.add_field(name="AUSTRALIA",value=a_time.strftime("%T || %D"),inline=False)
-    em.add_field(name="TEXAS",value=x_time.strftime("%T || %D"),inline=False)
-    em.add_field(name="PST",value=utc.strftime("%T || %D"),inline=False)
-
+    em.add_field(name="CST",value=c_time.strftime("%T || %D"),inline=False)
+    em.add_field(name="GMT- 4",value=a_time.strftime("%T || %D"),inline=False)
+    em.add_field(name="EST",value=est_time.strftime("%T || %D"),inline=False)
 
     await ctx.send(embed=em)
 
