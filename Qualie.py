@@ -124,16 +124,15 @@ async def calc(ctx, *, args):
 @client.command()
 async def time(ctx):
     em=discord.Embed(title="Time")
-    dt=datetime.datetime.now()
-    i_time=dt+datetime.timedelta(hours=5,minutes=30)
-    x_time=dt-datetime.timedelta(hours=6)    
+    dt=datetime.datetime.now() 
     a_time=dt-datetime.timedelta(hours=4)
-    est=dt-datetime.timedelta(hours=6)
-    utc=dt-datetime.timedelta(hours=8)
+    est=dt-datetime.timedelta(hours=5)
+    utc=dt-datetime.timedelta(hours=6)
 
     em.add_field(name="GMT",value=dt.strftime("%T || %D"),inline=False)
-    em.add_field(name="GMT- 4",value=a_time.strftime("%T || %D"),inline=False)
+    em.add_field(name="AST",value=a_time.strftime("%T || %D"),inline=False)
     em.add_field(name="EST",value=est.strftime("%T || %D"),inline=False)
+    em.add_field(name="CST",value=est.strftime("%T || %D"),inline=False)
 
     await ctx.send(embed=em)
 
