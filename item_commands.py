@@ -42,7 +42,7 @@ class Item_Command:
             await ctx.send("Wrong syntax papa")
             return
             
-        ex="INSERT INTO items VALUES("+ "name= '"+args[0]+"'"+","+"disc='"+args[1]+"'" +","+"price="+args[2]+","+"presence="+args[3]+")"
+        ex="INSERT INTO items(name, disc, price, presence) VALUES("+ "'"+args[0]+"'"+","+"'"+args[1]+"'" +","+args[2]+","+args[3]+")"
         await ctx.send(ex)
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
