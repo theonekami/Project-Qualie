@@ -43,22 +43,26 @@ class Item_Command:
             return
             
         ex="INSERT INTO items(name, disc, price, presence) VALUES("+ "'"+args[0]+"'"+","+"'"+args[1]+"'" +","+args[2]+","+args[3]+")"
-        await ctx.send(ex)
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         await conn.execute(ex)
         await conn.close()
-        await ctx.send("Inserted Item papa")
+        await ctx.send("Inserted Item papa!")
 
 
     @item.command(name="delete")
     async def delete_item(self,ctx,*,args):
-        ex="DELETE FROM items WHERE( name= '"+args+"'")
+        ex="DELETE FROM items WHERE( name= '"+args+"'"+")"
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         await conn.execute(ex)
         await conn.close()
-        await ctx.send("Inserted Item papa")
+        await ctx.send("Deleted Item papa!")
+
+    @commands.group()
+    async def shop(self, ctx):
+        pass
+
  
 
 
