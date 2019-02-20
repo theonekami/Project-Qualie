@@ -42,7 +42,7 @@ class Item_Command:
         ex="INSERT INTO TABLE items VALUES("
         for i in args:
             ex+=i+","
-        ex[len(ex)-1=")"
+        ex[len(ex)-1]=")"
 ##        DATABASE_URL = os.environ['DATABASE_URL']
 ##        conn = await asyncpg.connect(DATABASE_URL)
 ##        await conn.execute("""
