@@ -66,7 +66,7 @@ class Item_Command:
         conn = await asyncpg.connect(DATABASE_URL)
         v= await conn.fetch(ex)
         await conn.close()
-        x= discord.Embed(title= v[0],colour= discord.Colour((0,0,255)))
+        x= discord.Embed(title= v[0],colour= discord.Colour(0,0,255))
         x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
         await ctx.send(embed=x)
 
@@ -77,7 +77,7 @@ class Item_Command:
         conn = await asyncpg.connect(DATABASE_URL)
         v= await conn.fetch(ex)
         await conn.close()
-        x= discord.Embed(title= "Shop!",colour= discord.Colour((0,0,255)))
+        x= discord.Embed(title= "Shop!",colour= discord.Colour(0,0,255))
         for i in v:
              x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
         await ctx.send(embed=x)
