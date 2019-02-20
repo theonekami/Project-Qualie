@@ -66,9 +66,10 @@ class Item_Command:
         conn = await asyncpg.connect(DATABASE_URL)
         v= await conn.fetch(ex)
         await conn.close()
+        x= discord.Embed(title= "Shop!")
         for i in v:
-            for j in i:
-                await ctx.send(j)
+             x.add_field(name=i[0],value=i[1]+ "\n + Price:"+i[2], inline=False)
+        await ctx.send(embed=x)
 
 
  
