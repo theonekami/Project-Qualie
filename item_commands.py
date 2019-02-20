@@ -66,8 +66,9 @@ class Item_Command:
         conn = await asyncpg.connect(DATABASE_URL)
         v= await conn.fetch(ex)
         await conn.close()
-        x= discord.Embed(title= v[0])
-        x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
+        x= discord.Embed(title= "Info!")
+        for i in v:
+             x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
         await ctx.send(embed=x)
 
     @commands.command()
