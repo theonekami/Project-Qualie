@@ -8,12 +8,14 @@ import asyncpg
 #items
 #users
 
-class Item:
-    def __init__(self,Id,ocname):
-        self.ocname=ocname
-        self.currency=0
-        self.id=Id
-        
+##class Item:
+##    def __init__(self,name):
+##        self.Name=name
+##        self.
+##Description
+##Price
+##Shop Presence
+##        
 
 
 
@@ -28,26 +30,33 @@ class Item_Command:
         pass
 
     @item.command(name="add")
-    async def add_item(self,ctx):
+    async def add_item(self,ctx,*,args):
+        args=args.split(",")
+        if len(args<3):
+            await ctx.send("Wrong syntax papa")
+        elif len(args=3):
+            args.append("True")
+        elif len(args>4):
+            await ctx.send("Wrong syntax papa")
+            
+        ex="INSERT INTO TABLE items VALUES("
+        for i in args:
+            ex+=i+","
+        ex[len(ex)-1=")"
+##        DATABASE_URL = os.environ['DATABASE_URL']
+##        conn = await asyncpg.connect(DATABASE_URL)
+##        await conn.execute("""
+##                       INSERT INTO TABLE items(
+##                           id number PRIMARY KEY,
+##                           ocname text,
+##                           currency number,
+##                           presence bool
+##                           )
+##                       """)
+        await ctx.send(ex)
+        ##        await conn.close()
+ 
 
-
-    @commands.command()
-    async def fox(self,ctx):
-        em = discord.Embed(title="Fox Pix")
-        async with aiohttp.request("get","https://randomfox.ca/floof/") as res:
-            x= json.loads(await res.text())
-        res.close()
-        em.set_image(url=x['image'])
-        await ctx.send(embed= em)
-
-    @commands.command()
-    async def birb(self,ctx):
-        em = discord.Embed(title="birb pics")
-        async with aiohttp.request("get","http://shibe.online/api/birds") as res:
-            x= json.loads(await res.text())
-        res.close()
-        em.set_image(url=x[0])
-        await ctx.send(embed= em)
 
 ##    @commands,command()
 ##    async def search(self, ctx,args):
@@ -56,4 +65,4 @@ class Item_Command:
         
         
 def setup(bot):
-    bot.add_cog(Net_Commands(bot))
+    bot.add_cog(Item_Command(bot))

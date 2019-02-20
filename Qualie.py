@@ -51,7 +51,7 @@ async def on_ready():
     print('Created by Kaminolucky')
 ##
     home=client.get_channel(id=522127036022521871)
-
+    client.load_extension("item_commands")
     await home.send("Quailie reporting in")
 
     return await client.change_presence(activity=discord.Game(name="with Sam's chode"))
