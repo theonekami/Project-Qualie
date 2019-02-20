@@ -59,9 +59,14 @@ class Item_Command:
         await conn.close()
         await ctx.send("Deleted Item papa!")
 
-    @commands.group()
+    @commands.command()
     async def shop(self, ctx):
-        pass
+        ex="SELECT * items"
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        v= await conn.fetch(ex)
+        await conn.close()
+        await ctx.send(v)
 
  
 
