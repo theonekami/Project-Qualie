@@ -179,8 +179,8 @@ async def purge(ctx,args):
 async def test(ctx):
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = await asyncpg.connect(DATABASE_URL)
-    x= await conn.fetch("""SHOW COLUMNS FROM items
-                       """)
+    x= await conn.fetch("""select column_name, data_type, character_maximum_length
+from INFORMATION_SCHEMA.COLUMNS where table_name = 'items'""")
     await ctx.send("works")
     await ctx.send(x)
     await conn.close()
