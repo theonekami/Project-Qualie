@@ -66,8 +66,9 @@ class Item_Command:
         conn = await asyncpg.connect(DATABASE_URL)
         v= await conn.fetch(ex)
         await conn.close()
-        for i in range(0,3):
-            await ctx.send(v[0])
+        for i in v:
+            for j in i:
+                await ctx.send(j)
 
 
  
