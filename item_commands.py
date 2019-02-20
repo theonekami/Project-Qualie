@@ -34,10 +34,12 @@ class Item_Command:
         args=args.split(",")
         if len(args)<3:
             await ctx.send("Wrong syntax papa")
+            return
         elif len(args)=3:
             args.append("True")
         elif len(args)>4:
             await ctx.send("Wrong syntax papa")
+            return
             
         ex="INSERT INTO TABLE items VALUES("
         for i in args:
