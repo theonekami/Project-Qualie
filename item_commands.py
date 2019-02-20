@@ -32,11 +32,11 @@ class Item_Command:
     @item.command(name="add")
     async def add_item(self,ctx,*,args):
         args=args.split(",")
-        if len(args<3):
+        if len(args)<3:
             await ctx.send("Wrong syntax papa")
-        elif len(args=3):
+        elif len(args)=3:
             args.append("True")
-        elif len(args>4):
+        elif len(args)>4:
             await ctx.send("Wrong syntax papa")
             
         ex="INSERT INTO TABLE items VALUES("
