@@ -42,7 +42,7 @@ class Item_Command:
             await ctx.send("Wrong syntax papa")
             return
             
-        ex='INSERT INTO TABLE items VALUES("'+"'"+args[0]+"'"+","+"'"+args[1]+"'"+","+"'"+args[2]+"'"+","+args[3]+'")'
+        ex='INSERT INTO items VALUES("'+"'"+args[0]+"'"+","+"'"+args[1]+"'"+","+"'"+args[2]+"'"+","+args[3]+'")'
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         await conn.execute(ex)
@@ -52,7 +52,7 @@ class Item_Command:
 
     @item.command(name="delete")
     async def delete_item(self,ctx,*,args):
-        ex='INSERT INTO TABLE items VALUES("'+"'"+args[0]+"'"+","+"'"+args[1]+"'"+","+"'"+args[2]+"'"+","+args[3]+'")'
+        ex='DELETE FROM items WHERE( name"'+"'"+args[0]+"'"+","+"'"+args[1]+"'"+","+"'"+args[2]+"'"+","+args[3]+'")'
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         await conn.execute(ex)
