@@ -59,6 +59,17 @@ class Item_Command:
         await conn.close()
         await ctx.send("Deleted Item papa!")
 
+    @item.command(name="show")
+    async def show_item(self,ctx,*,args):
+        ex="SELECT * FROM items WHERE( name= '"+args+"'"+")"
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        v= await conn.fetch(ex)
+        await conn.close()
+        x= discord.Embed(title= v[0],colour= discord.Colour(blue()))
+        x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
+        await ctx.send(embed=x)
+
     @commands.command()
     async def shop(self, ctx):
         ex="SELECT * FROM items"
@@ -66,9 +77,9 @@ class Item_Command:
         conn = await asyncpg.connect(DATABASE_URL)
         v= await conn.fetch(ex)
         await conn.close()
-        x= discord.Embed(title= "Shop!")
+        x= discord.Embed(title= "Shop!",colour= discord.Colour(blue()))
         for i in v:
-             x.add_field(name=i[0],value=i[1]+ "\n Price:"+str(i[2]), inline=False)
+             x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
         await ctx.send(embed=x)
 
 
