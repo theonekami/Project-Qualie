@@ -35,7 +35,7 @@ class Item_Command:
         if len(args)<3:
             await ctx.send("Wrong syntax papa")
             return
-        elif len(args)=3:
+        elif len(args)==3:
             args.append("True")
         elif len(args)>4:
             await ctx.send("Wrong syntax papa")
