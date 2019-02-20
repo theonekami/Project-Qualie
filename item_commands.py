@@ -42,11 +42,11 @@ class Item_Command:
             return
             
         ex="INSERT INTO TABLE items VALUES("+"'"+args[0]+"'"+","+"'"+args[1]+"'"+","+"'"+args[2]+"'"+","+args[3]+")"
-##        DATABASE_URL = os.environ['DATABASE_URL']
-##        conn = await asyncpg.connect(DATABASE_URL)
-####        await conn.execute(ex)
-##        await conn.close()
-        await ctx.send(ex)
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        await conn.execute(ex)
+        await conn.close()
+        await ctx.send("Inserted Item papa")
  
 
 
