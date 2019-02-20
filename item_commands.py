@@ -61,7 +61,7 @@ class Item_Command:
 
     @commands.command()
     async def shop(self, ctx):
-        ex="SELECT * items"
+        ex="SELECT * FROM items"
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         v= await conn.fetch(ex)
