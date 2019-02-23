@@ -80,7 +80,7 @@ class Item_Command:
         await conn.close()
         x= discord.Embed(title= "Shop!")
         for i in v:
-             x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
+             x.add_field(name=":gem:"+str(i[2])+ " - "+ i[0],value=i[1], inline=False)
         await ctx.send(embed=x)
 
 
