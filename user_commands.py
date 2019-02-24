@@ -25,7 +25,7 @@ class User_Command(commands.Cog):
         y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
         if(len(y) == 0):
             await ctx.send("creating new user")
-            await conn.execute("INSERT INTO USERS (id, money, LevelSmithing, LevelExtraction) VALUES(" + str(ctx.message.author.id)+ ",0,1,1)")
+            await conn.execute("INSERT INTO USERS (id, money, LevelSmithing, LevelExtraction) VALUES('" + str(ctx.message.author.id)+ "',0,1,1)")
             y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
         else:
             await ctx.send("Fetching for ")
@@ -35,7 +35,16 @@ class User_Command(commands.Cog):
              x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
         await ctx.send(embed=x)
 
-    
+    @commands.group()
+    async def money(self, ctx):
+        pass
+
+    @money.command(name="add")
+    async def money_add(self,ctx):
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        y=await conn.fetch("UPDATE users SET money = 15000 WHERE ID = 3")
+        
 
   
         
