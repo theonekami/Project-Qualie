@@ -3,66 +3,38 @@ import discord
 from discord.ext import commands
 import json
 import aiohttp
+import asyncpg
 
 #items
 #users
 
-class Item:
-    def __init__(self,Id,ocname):
-        self.ocname=ocname
-        self.currency=0
-        self.id=Id
-        self.levels=[]
-        self.items=[]
 
 
 
 
-class Item_Command(commands.Cog):
+class User_Command(commands.Cog):
     def __init__(self, bot):
         self.bot=bot
 
 
     @commands.command()
-    async def cat(self, ctx):
-        em = discord.Embed(title="Cat Pix")
-        async with aiohttp.request("get","http://thecatapi.com/api/images/get") as res:
-            em.set_image(url=res.url)
-        res.close()
-        await ctx.send(embed= em)
+    async def inventory(self, ctx):
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
+        if(len(y) == 0):
+            await ctx.send("creating new user")
+            await conn.execute("INSERT INTO USERS (id, money, LevelSmithing, LevelExtraction) VALUES(" + str(ctx.message.author.id)+ ",0,1,1)")
+            y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
+        else:
+            await ctx.send("Fetching for ")
+        await conn.close()
+        x= discord.Embed(title= "Info!")
+        for i in v:
+             x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
+        await ctx.send(embed=x)
 
-    @commands.command()
-    async def dog(self,ctx):
-        em = discord.Embed(title="Doggo Pix")
-        async with aiohttp.request("get","https://dog.ceo/api/breeds/image/random") as res:
-            x= json.loads(await res.text())
-        res.close()
-        em.set_image(url=x['message'])
-        await ctx.send(embed= em)
-
-    @commands.command()
-    async def fox(self,ctx):
-        em = discord.Embed(title="Fox Pix")
-        async with aiohttp.request("get","https://randomfox.ca/floof/") as res:
-            x= json.loads(await res.text())
-        res.close()
-        em.set_image(url=x['image'])
-        await ctx.send(embed= em)
-
-    @commands.command()
-    async def birb(self,ctx):
-        em = discord.Embed(title="birb pics")
-        async with aiohttp.request("get","http://shibe.online/api/birds") as res:
-            x= json.loads(await res.text())
-        res.close()
-        em.set_image(url=x[0])
-        await ctx.send(embed= em)
-
-##    @commands,command()
-##    async def search(self, ctx,args):
-##        x="https://www.google.co.in/search?q="+str(args)+"&rlz=1C1CHBF_enIN799IN799&oq=meems&aqs=chrome..69i57j0l5.806j0j7&sourceid=chrome&ie=UTF-8"
-##        
-        
+  
         
 def setup(bot):
-    bot.add_cog(Net_Commands(bot))
+    bot.add_cog(User_Commands(bot))
