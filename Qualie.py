@@ -184,7 +184,7 @@ async def test(ctx):
 id int,
 money int,
 LevelSmithing int,
-
+LevelExtraction int
 );""")
     await conn.close()
 
