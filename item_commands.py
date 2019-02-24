@@ -17,7 +17,15 @@ import os
 ##Price
 ##Shop Presence
 ##        
-
+def basic_check(ctx):  ##for funsies
+    p=ctx.author
+    for i in p.roles:
+        if i.name=="Staff Access":
+            return True
+    if (p == ctx.guild.owner) or (p.id == 256390874848690176):
+        return True
+    else:
+        return False
 
 
 
@@ -31,6 +39,7 @@ class Item_Command(commands.Cog):
         pass
 
     @item.command(name="add")
+    @commands.check(basic_check)
     async def add_item(self,ctx,*,args):
         args=args.split(",")
         if len(args)<3:
@@ -51,6 +60,7 @@ class Item_Command(commands.Cog):
 
 
     @item.command(name="delete")
+    @commands.check(basic_check)
     async def delete_item(self,ctx,*,args):
         ex="DELETE FROM items WHERE( name= '"+args+"'"+")"
         DATABASE_URL = os.environ['DATABASE_URL']

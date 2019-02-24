@@ -37,4 +37,4 @@ class User_Command(commands.Cog):
   
         
 def setup(bot):
-    bot.add_cog(User_Commands(bot))
+    bot.add_cog(User_Command(bot))
