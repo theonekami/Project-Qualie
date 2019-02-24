@@ -4,6 +4,7 @@ from discord.ext import commands
 import json
 import aiohttp
 import asyncpg
+import os
 
 #items
 #users
@@ -33,6 +34,8 @@ class User_Command(commands.Cog):
         for i in v:
              x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
         await ctx.send(embed=x)
+
+    
 
   
         
