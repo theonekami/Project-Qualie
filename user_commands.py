@@ -32,7 +32,7 @@ class User_Command(commands.Cog):
         await conn.close()
         x= discord.Embed(title= "Info!")
         for i in y:
-             x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
+             x.add_field(name=":gem:"+str(i[2])+ " "+ str(i[0]),value=str(i([1]), inline=False)
         await ctx.send(embed=x)
 
     @commands.group()
