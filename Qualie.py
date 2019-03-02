@@ -187,7 +187,7 @@ async def test(ctx):
 """select column_name, data_type, character_maximum_length
 from INFORMATION_SCHEMA.COLUMNS where table_name = 'users'"""
 
-"""Create table users (id  bigint,money int , items varchar,smithing int, sxtraction int)""""
+"""Create table users (id  bigint,money int , items varchar,smithing int, sxtraction int)"""
 
     
 client.run(os.environ["TOKEN"])
