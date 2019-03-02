@@ -180,14 +180,14 @@ async def purge(ctx,args):
 async def test(ctx):
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = await asyncpg.connect(DATABASE_URL)
-    x= await conn.execute("""Create table users (id  varchar(40), money int , items varchar,smithing int, sxtraction int)""")
+    x= await conn.execute("""drop table users""")
     await ctx.send("works")
     await conn.close()
 
 """select column_name, data_type, character_maximum_length
 from INFORMATION_SCHEMA.COLUMNS where table_name = 'users'"""
 
-
+"""Create table users (id  bigint,money int , items varchar,smithing int, sxtraction int)"""
 
     
 client.run(os.environ["TOKEN"])
