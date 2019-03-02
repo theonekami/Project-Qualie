@@ -31,7 +31,7 @@ class User_Command(commands.Cog):
             await ctx.send("Fetching for ")
         await conn.close()
         x= discord.Embed(title= "Info!")
-        for i in v:
+        for i in y:
              x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
         await ctx.send(embed=x)
 
