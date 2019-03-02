@@ -9,7 +9,7 @@ import os
 #items
 #users
 
-
+"""Create table users (id  bigint,money int , items varchar,smithing int, sxtraction int)"""
 
 
 
@@ -25,7 +25,7 @@ class User_Command(commands.Cog):
         y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
         if(len(y) == 0):
             await ctx.send("creating new user")
-            await conn.execute("INSERT INTO USERS (id, money, LevelSmithing, LevelExtraction) VALUES('" + str(ctx.message.author.id)+ "',0,1,1)")
+            await conn.execute("INSERT INTO USERS (id, money, smithing, sxtraction) VALUES('" + str(ctx.message.author.id)+ "',0,1,1)")
             y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
         else:
             await ctx.send("Fetching for ")
