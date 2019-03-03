@@ -105,18 +105,22 @@ class User_Command(commands.Cog):
 
     @level.command(name="smithing")
     @commands.check(basic_check)
-    async def level_sm(self,ctx):
+    async def level_sm(self,ctx,args=1):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
-        x=await conn.fetch("SELECT smithing FROM users WHERE id="+str(ctx.message.mentions[0].id))
+        x=await conn.fetch("SELECT smithexp FROM users WHERE id="+str(ctx.message.mentions[0].id))
+        y=await conn.fetch("SELECT smithexp FROM users WHERE id="+str(ctx.message.mentions[0].id))
+
         if(len(x)==0):
             await ctx.send("User doesn't exist. Tell them to use the inventory command papa!")
             return
-        t=x[0][0]+1
-        if(t%20==0):
+        t=x[0][0]+int(args)
+        if(t>20==0):
+            await conn.execute("UPDATE users SET smithing ="+str(y[0][0]+1)+" WHERE id=" + str(ctx.message.author.id))
+            t-=20
             await ctx.mentions[0].send("You have leveled up! Higher quality actions are now possible")
-        y=await conn.fetch("UPDATE users SET smithing ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
-        await ctx.send("Level Up! Papa")
+        y=await conn.fetch("UPDATE users SET smithexp ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
+        await ctx.send("Exp Up! Papa")
         await conn.close()
 
 
