@@ -180,8 +180,7 @@ async def purge(ctx,args):
 async def test(ctx):
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = await asyncpg.connect(DATABASE_URL)
-    x= await conn.execute("""ALTER TABLE users ADD COLUMN smithexp int""")
-    x= await conn.execute("""ALTER TABLE users ADD COLUMN excexp  int""")
+    x= await conn.execute("""DROP TABLE USERS""")
     await ctx.send("works")
     await conn.close()
 
