@@ -85,6 +85,24 @@ class User_Command(commands.Cog):
         await ctx.send("Money added Papa")
         await conn.close()
 
+    @commands.group()
+    async def level(self, ctx):
+        pass
+
+    @money.command(name="extraction")
+    @commands.check(basic_check)
+    async def level_ex(self,ctx):
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        x=await conn.fetch("SELECT sxtraction FROM users WHERE id="+str(ctx.message.mentions[0].id))
+        t=x[0][0]+1
+        if(t%20==0):
+            await ctx.mentions[0].send("You have leveled up! Higher quality actions are now possible")
+
+        y=await conn.fetch("UPDATE users SET sxtraction ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
+        await ctx,send("Level Up! Papa")
+        await conn.close()
+
   
         
 def setup(bot):
