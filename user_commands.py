@@ -115,7 +115,7 @@ class User_Command(commands.Cog):
             await ctx.send("User doesn't exist. Tell them to use the inventory command papa!")
             return
         t=int(x[0][0])+int(args)
-        if(t>20==0):
+        while(t>20==0):
             await conn.execute("UPDATE users SET smithing ="+str(y[0][0]+1)+" WHERE id=" + str(ctx.message.author.id))
             t-=20
             await ctx.mentions[0].send("You have leveled up! Higher quality actions are now possible")
