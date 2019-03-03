@@ -103,7 +103,17 @@ class Item_Command(commands.Cog):
             x.add_field(value="You don't have enough to buy this item Sir")
             await ctx.send(embed=x)
             return
-        y=await conn.fetch("SELECT MONEY FROM USERS WHERE ID=" +str(ctx.message.author.id))
+        t=y[0][0]-v[0][2]
+        
+        q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(ctx.message.author.id))
+        if not(q):
+            q=""
+        q+=v[0][0]+","
+        await conn.execute("UPDATE users SET money ="+ t+" WHERE id=" + str(i.id))
+        await conn.execute("UPDATE users SET items ="+ q+" WHERE id=" + str(i.id))
+        if(v[3]==False):
+            await conn.fetch("DELETE FROM ITEMS WHERE NAME=" +str(v[0][0]))
+        await ctx.send("Success")
         await conn.close()
 
 
