@@ -27,6 +27,10 @@ def basic_check(ctx):  ##for funsies
     else:
         return False
 
+def accept(a):
+    a=a.lower
+    y=["y","yes"]
+    return a in x
 
 
 class Item_Command(commands.Cog):
@@ -80,6 +84,22 @@ class Item_Command(commands.Cog):
         for i in v:
              x.add_field(name=":gem:"+str(i[2])+ " "+ i[0],value=i[1], inline=False)
         await ctx.send(embed=x)
+
+
+
+    @item.command(name="buy")
+    async def buy_item(self,ctx,*,args):
+        ex="SELECT * FROM items WHERE( name= '"+args+"'"+")"
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        v= await conn.fetch(ex)
+        y=await conn.fetch("SELECT MONEY FROM USERS WHERE ID=" +ctx.message.mentions[0])
+        x= discord.Embed(title= "Info!")
+        x.add_field(name="Transaction",value="Do you want to buy "+v[0][0]+ " for :gem:" + v[0][2]+"?")
+        await ctx.send(embed=x)
+        self.bot.wait_for("message",timeout=60.0,check=accept)
+        await conn.close()
+
 
     @commands.command()
     async def shop(self, ctx):
