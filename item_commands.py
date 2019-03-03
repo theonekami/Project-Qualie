@@ -95,7 +95,7 @@ class Item_Command(commands.Cog):
         v= await conn.fetch(ex)
         y=await conn.fetch("SELECT MONEY FROM USERS WHERE ID=" +str(ctx.message.author.id))
         x= discord.Embed(title= "Info!")
-        x.add_field(name="Transaction",value="Do you want to buy "+v[0][0]+ " for :gem:" + v[0][2]+"?")
+        x.add_field(name="Transaction",value="Do you want to buy "+v[0][0]+ " for :gem:" + str(v[0][2])+"?")
         await ctx.send(embed=x)
         self.bot.wait_for("message",timeout=60.0,check=accept)
         await conn.close()
