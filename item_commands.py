@@ -16,6 +16,8 @@ import os
 ##Description
 ##Price
 ##Shop Presence
+
+##"""Create table item_list (name  varchar,disc varchar , price int)"""
 ##        
 def basic_check(ctx):  ##for funsies
     p=ctx.author
@@ -32,7 +34,6 @@ def accept(a):
     y=["y","yes"]
     return a in y
 
-
 class Item_Command(commands.Cog):
     def __init__(self, bot):
         self.bot=bot
@@ -41,6 +42,19 @@ class Item_Command(commands.Cog):
     @commands.group()
     async def item(self, ctx):
         pass
+
+    @item.command(name="list")
+    @commands.check(basic_check)
+    async def list_item(self,ctx):
+        ex="SELECT * FROM item_list"
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        v= await conn.fetch(ex)
+        await conn.close()
+        x= discord.Embed(title= "List!")
+        for i in v:
+             x.add_field(name=":gem:"+str(i[2])+ " - "+ i[0],value=i[1], inline=False)
+        await ctx.send(embed=x)
 
     @item.command(name="add")
     @commands.check(basic_check)
@@ -62,6 +76,9 @@ class Item_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         await conn.execute(ex)
+        w= await conn.fetch("SELECT * FROM ITEMLIST WHERE NAME='"args[0].strip()+"'")
+        if(!w):
+            await conn.execute("INSERT INTO item_list(name, disc) VALUES('"+"'"+args[0].strip()+"'"+","+"'"+args[1]+"')")
         await conn.close()
         await ctx.send("Inserted Item papa!")
 
@@ -70,15 +87,17 @@ class Item_Command(commands.Cog):
     @commands.check(basic_check)
     async def delete_item(self,ctx,*,args):
         ex="DELETE FROM items WHERE( name= '"+args+"'"+")"
+        ex2="DELETE FROM item_list WHERE( name= '"+args+"'"+")"
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         await conn.execute(ex)
+        await conn.execute(ex2)
         await conn.close()
         await ctx.send("Deleted Item papa!")
 
     @item.command(name="show")
     async def show_item(self,ctx,*,args):
-        ex="SELECT * FROM items WHERE( name= '"+args+"'"+")"
+        ex="SELECT * FROM item_list WHERE( name= '"+args+"'"+")"
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         v= await conn.fetch(ex)
