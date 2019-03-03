@@ -120,6 +120,34 @@ class Item_Command(commands.Cog):
         await ctx.send("Success")
         await conn.close()
 
+    @item.command(name="give")
+    @commands.check(basic_check)
+    async def give_item(self,ctx,*,args):
+        args=args.split(",")            
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        men=ctx.message.mentions
+        rol=ctx.message.role_mentions
+        if(men):
+            for i in men:
+                q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
+                if(q[0][0]==None):
+                    z=v[0][0]+"|"
+                else:
+                    z=q[0][0]+v[0][0]+"|"
+                w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
+                await i.send("You have gotten" +)
+        elif(rol):
+            for i in rol.members:
+                q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
+                if(q[0][0]==None):
+                    z=v[0][0]+"|"
+                else:
+                    z=q[0][0]+v[0][0]+"|"
+                w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
+
+        await conn.close()
+        await ctx.send("Gave Item papa!")
 
     @commands.command()
     async def shop(self, ctx):
@@ -127,6 +155,7 @@ class Item_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         v= await conn.fetch(ex)
+        await ctx.send(v)
         await conn.close()
         x= discord.Embed(title= "Shop!")
         for i in v:
