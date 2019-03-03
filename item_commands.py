@@ -30,7 +30,7 @@ def basic_check(ctx):  ##for funsies
 def accept(a):
     a=a.content.lower()
     y=["y","yes"]
-    return a in x
+    return a in y
 
 
 class Item_Command(commands.Cog):
