@@ -123,7 +123,7 @@ class Item_Command(commands.Cog):
     @item.command(name="give")
     @commands.check(basic_check)
     async def give_item(self,ctx):
-        await ctx send("What item are you gonna give papa?")
+        await ctx.send("What item are you gonna give papa?")
         rew=await self.bot.wait_for("message",timeout=120)
         await ctx.send(rew)
 ##        DATABASE_URL = os.environ['DATABASE_URL']
