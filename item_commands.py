@@ -107,9 +107,9 @@ class Item_Command(commands.Cog):
         
         q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(ctx.message.author.id))
         if(q[0][0]==None):
-            z=v[0][0]+"|"
+            z=v[0][0] +":"+ v[0][1]+"|"
         else:
-            z=q[0][0]+v[0][0]+"|"
+            z=q[0][0]+v[0][0] +":"+ v[0][1]+"|"
   
         w=await conn.fetch("UPDATE users SET money ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
         w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
@@ -123,6 +123,7 @@ class Item_Command(commands.Cog):
     @item.command(name="give")
     @commands.check(basic_check)
     async def give_item(self,ctx):
+        await ctx send("What item are you gonna give papa?")
         rew=await self.bot.wait_for("message",timeout=120)
         await ctx.send(rew)
 ##        DATABASE_URL = os.environ['DATABASE_URL']
