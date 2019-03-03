@@ -143,9 +143,9 @@ class Item_Command(commands.Cog):
             for i in rol:
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
                 if(q[0][0]==None):
-                    z=v[0][0] +":"+ v[0][1]+"|"
+                    z=rew[0] +":"+ rew[1]+"|"
                 else:
-                    z=q[0][0]+v[0][0] +":"+ v[0][1]+"|"
+                    z=q[0][0]+rew[0] +":"+ rew[1]+"|"
                 w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
 
         await conn.close()
