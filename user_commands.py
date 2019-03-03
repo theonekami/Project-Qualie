@@ -146,6 +146,7 @@ class User_Command(commands.Cog):
         t=int(x[0][0])+int(args)
         if(y[0][0]>=5):
             await ctx.send("You have reached the max level")
+            await conn.close()
         while(t>20):
             await conn.execute("UPDATE users SET smithing ="+str(y[0][0]+1)+" WHERE id=" + str(ctx.message.mentions[0].id))
             t-=20
