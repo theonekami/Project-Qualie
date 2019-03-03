@@ -109,6 +109,9 @@ class User_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         x=await conn.fetch("SELECT smithing FROM users WHERE id="+str(ctx.message.mentions[0].id))
+        if(len(x)==0):
+            await ctx.send("User doesn't exist. Tell them to use the inventory command papa!")
+            return
         t=x[0][0]+1
         if(t%20==0):
             await ctx.mentions[0].send("You have leveled up! Higher quality actions are now possible")
