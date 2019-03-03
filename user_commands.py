@@ -8,6 +8,30 @@ import os
 
 #items
 #users
+def value_in_list(ls, val): # ls: a list; val: a value
+    for test_value in ls:
+        if (test_value == val):
+            return True
+    return False
+
+def gadmin_ck(ctx): # Check if user is a global bot admin
+    return value_in_list(bot_admin_discriminators, ctx.author.id)
+
+def Kami_check(ctx):  ##for funsies
+    if (ctx.author.id == 256390874848690176) :
+        return True
+    else:
+        return False
+
+def basic_check(ctx):  ##for funsies
+    p=ctx.author
+    for i in p.roles:
+        if i.name=="Staff Access":
+            return True
+    if (p == ctx.guild.owner) or (p.id == 256390874848690176):
+        return True
+    else:
+        return False
 
 """Create table users (id  bigint,money int , items varchar,smithing int, sxtraction int)"""
 
@@ -38,7 +62,7 @@ class User_Command(commands.Cog):
             x.add_field(name="Smithing level", value=str(i[3]),inline=True)
             x.add_field(name="Extraction level", value=str(i[4]),inline=True)
             w=""
-            if j==None:
+            if i[2]==None:
                 w="None"
             else:
                 for j in i[2]:
@@ -52,6 +76,7 @@ class User_Command(commands.Cog):
         pass
 
     @money.command(name="add")
+    @commands.check(basic_check)
     async def money_add(self,ctx,args):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
