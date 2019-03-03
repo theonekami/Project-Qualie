@@ -100,7 +100,7 @@ class User_Command(commands.Cog):
         if(t%20==0):
             await ctx.mentions[0].send("You have leveled up! Higher quality actions are now possible")
         y=await conn.fetch("UPDATE users SET sxtraction ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
-        await ctx,send("Level Up! Papa")
+        await ctx.send("Level Up! Papa")
         await conn.close()
 
   
