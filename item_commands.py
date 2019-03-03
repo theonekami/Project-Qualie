@@ -136,7 +136,7 @@ class Item_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         men=ctx.message.mentions
-        rol=ctx.message.role_mentions[0].members
+        rol=ctx.message.role_mentions
         if(men):
             for i in men:
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
@@ -150,7 +150,7 @@ class Item_Command(commands.Cog):
                 w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(i.id))
 ##                await i.send("You have gotten" + )
         elif(rol):
-            for i in rol:
+            for i in rol[0].members:
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
                 if(len(q)==0):
                     await ctx.send("Could not give to " + str(i.name))
