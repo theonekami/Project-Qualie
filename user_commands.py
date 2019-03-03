@@ -72,6 +72,16 @@ class User_Command(commands.Cog):
             
         await ctx.send(embed=x)
 
+##    @commands.command()
+##    async def throw(self, ctx):
+##        DATABASE_URL = os.environ['DATABASE_URL']
+##        conn = await asyncpg.connect(DATABASE_URL)
+##        y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
+##        for i in y:
+##            
+##            
+##        await ctx.send(embed=x)
+
     @commands.group()
     async def money(self, ctx):
         pass
@@ -111,10 +121,10 @@ class User_Command(commands.Cog):
             return
         t=int(x[0][0])+int(args)
         while(t>20):
-            await conn.execute("UPDATE users SET extraction ="+str(y[0][0]+1)+" WHERE id=" + str(ctx.message.author.id))
+            await conn.execute("UPDATE users SET extraction ="+str(y[0][0]+1)+" WHERE id=" + str(ctx.message.mentions[0].id))
             t-=20
             await ctx.message.mentions[0].send("You have leveled up! Higher quality actions are now possible")
-        y=await conn.fetch("UPDATE users SET excexp ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
+        y=await conn.fetch("UPDATE users SET excexp ="+ str(t)+" WHERE id=" + str(ctx.message.mentions[0].id))
         await ctx.send("Exp Up! Papa")
         await conn.close()
 
@@ -131,10 +141,10 @@ class User_Command(commands.Cog):
             return
         t=int(x[0][0])+int(args)
         while(t>20):
-            await conn.execute("UPDATE users SET smithing ="+str(y[0][0]+1)+" WHERE id=" + str(ctx.message.author.id))
+            await conn.execute("UPDATE users SET smithing ="+str(y[0][0]+1)+" WHERE id=" + str(ctx.message.mentions[0].id))
             t-=20
             await ctx.message.mentions[0].send("You have leveled up! Higher quality actions are now possible")
-        y=await conn.fetch("UPDATE users SET smithexp ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
+        y=await conn.fetch("UPDATE users SET smithexp ="+ str(t)+" WHERE id=" + str(ctx.message.mentions[0].id))
         await ctx.send("Exp Up! Papa")
         await conn.close()
 
