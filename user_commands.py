@@ -80,7 +80,7 @@ class User_Command(commands.Cog):
     async def money_add(self,ctx,args):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
-        for i in message.mentions:
+        for i in ctx.message.mentions:
             x=await conn.fetch("SELECT money FROM users WHERE id="+str(i.id))
             y=await conn.fetch("UPDATE users SET money ="+ str(int(args)+x[0][0])+" WHERE id=" + str(i.id))
         await conn.close()
