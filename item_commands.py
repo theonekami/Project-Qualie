@@ -97,7 +97,7 @@ class Item_Command(commands.Cog):
         x= discord.Embed(title= "Info!")
         x.add_field(name="Transaction",value="Do you want to buy "+v[0][0]+ " for :gem:" + str(v[0][2])+"?")
         await ctx.send(embed=x)
-        self.bot.wait_for("message",timeout=60.0,check=accept)
+        self.bot.wait_for("message",timeout=120,check=accept)
         if(y[0][0]<v[0][2]):
             x= discord.Embed(title= "Error!")
             x.add_field(value="You don't have enough to buy this item Sir")
