@@ -118,7 +118,7 @@ class User_Command(commands.Cog):
         while(t>20):
             await conn.execute("UPDATE users SET smithing ="+str(y[0][0]+1)+" WHERE id=" + str(ctx.message.author.id))
             t-=20
-            await ctx.mentions[0].send("You have leveled up! Higher quality actions are now possible")
+            await ctx.message.mentions[0].send("You have leveled up! Higher quality actions are now possible")
         y=await conn.fetch("UPDATE users SET smithexp ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
         await ctx.send("Exp Up! Papa")
         await conn.close()
