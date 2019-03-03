@@ -78,7 +78,7 @@ class User_Command(commands.Cog):
         conn = await asyncpg.connect(DATABASE_URL)
         y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
         for i in y:
-            await ctx.send(i[0])
+            for j in i.split()
         await conn.close()
 
     @commands.group()

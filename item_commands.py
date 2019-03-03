@@ -50,12 +50,15 @@ class Item_Command(commands.Cog):
             await ctx.send("Wrong syntax papa")
             return
         elif len(args)==3:
-            args.append("True")
+            args.append("-1")
         elif len(args)>4:
             await ctx.send("Wrong syntax papa")
             return
+        elif args[3]==0:
+            await ctx.send("You put zero, which might end up as an error papa")
+            return
             
-        ex="INSERT INTO items(name, disc, price, presence) VALUES("+ "'"+args[0].strip()+"'"+","+"'"+args[1]+"'" +","+args[2]+","+args[3]+")"
+        ex="INSERT INTO items(name, disc, price, stock) VALUES("+ "'"+args[0].strip()+"'"+","+"'"+args[1]+"'" +","+args[2]+","+args[3]+")"
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         await conn.execute(ex)
@@ -115,8 +118,12 @@ class Item_Command(commands.Cog):
         w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
 
                                                                                  
-        if(v[0][3]==False):
-            await conn.fetch("DELETE FROM items WHERE name='" +str(v[0][0])+"'")
+        if(v[0][3] != -1):
+            t=v[0][3]-1
+            if(t==0):
+                await conn.fetch("DELETE FROM items WHERE name='" +str(v[0][0])+"'")
+            else:
+                await conn.fetch("UPDATE USERS SET ITEMS =" + str(t) +"WHERE NAME =" + v[0][0])
         await ctx.send("Success")
         await conn.close()
 
