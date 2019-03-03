@@ -182,7 +182,7 @@ async def test(ctx):
     conn = await asyncpg.connect(DATABASE_URL)
     x= await conn.execute("""select column_name, data_type, character_maximum_length
 from INFORMATION_SCHEMA.COLUMNS where table_name = 'users'""")
-    await ctx.send("works")
+    await ctx.send(x)
     await conn.close()
 
 """select column_name, data_type, character_maximum_length
