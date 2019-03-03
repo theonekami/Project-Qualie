@@ -125,7 +125,6 @@ class Item_Command(commands.Cog):
     async def give_item(self,ctx):
         await ctx.send("What item are you gonna give papa?")
         rew=await self.bot.wait_for("message",timeout=120)
-        await ctx.send(rew)
         rew=rew.content.split(",")
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
@@ -135,9 +134,9 @@ class Item_Command(commands.Cog):
             for i in men:
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
                 if(q[0][0]==None):
-                    z=v[0][0] +":"+ v[0][1]+"|"
+                    z=rew[0] +":"+ rew[1]+"|"
                 else:
-                    z=q[0][0]+v[0][0] +":"+ v[0][1]+"|"
+                    z=q[0][0]+rew[0] +":"+ rew[1]+"|"
                 w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
 ##                await i.send("You have gotten" + )
         elif(rol):
