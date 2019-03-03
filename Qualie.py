@@ -180,7 +180,7 @@ async def purge(ctx,args):
 async def test(ctx):
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = await asyncpg.connect(DATABASE_URL)
-    x= await conn.fetch("""UPDATE TABLE ITEMS STOCK=1 WHERE presence=False""")
+    x= await conn.fetch("""UPDATE TABLE ITEMS STOCK=-1 WHERE presence=True""")
     await ctx.send(x)
     await conn.close()
 
