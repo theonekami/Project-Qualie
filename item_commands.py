@@ -107,7 +107,7 @@ class Item_Command(commands.Cog):
         
         q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(ctx.message.author.id))
         if not(q[0][0]):
-            q="'"
+            q[0][0]="'"
         q[0][0]+=v[0][0]+","
   
         await ctx.send(q)
