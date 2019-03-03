@@ -58,7 +58,7 @@ class User_Command(commands.Cog):
         for i in y:
             t=self.bot.get_user(id=i[0])
             x= discord.Embed(title= t.name)
-            x.add_field(name="Money:" ,value=":gem: -"+str(i[1]), inline=True)
+            x.add_field(name="Money:" ,value=":gem: "+str(i[1]), inline=True)
             x.add_field(name="Smithing level:", value=str(i[3]),inline=True)
             x.add_field(name="Extraction level:", value=str(i[4]),inline=True)
             w=""
