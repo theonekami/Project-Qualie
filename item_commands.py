@@ -76,7 +76,7 @@ class Item_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         await conn.execute(ex)
-        w= await conn.fetch("SELECT * FROM ITEMLIST WHERE NAME='"args[0].strip()+"'")
+        w= await conn.fetch("SELECT * FROM ITEM_LIST WHERE NAME='"+args[0].strip()+"'")
         if(!w):
             await conn.execute("INSERT INTO item_list(name, disc) VALUES('"+"'"+args[0].strip()+"'"+","+"'"+args[1]+"')")
         await conn.close()
