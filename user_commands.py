@@ -93,7 +93,7 @@ class User_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         men=ctx.message.mentions
-        rol=ctx.message.role_mentions.members
+        rol=ctx.message.role_mentions[0].members
         if(men):
             for i in men:
                 x=await conn.fetch("SELECT money FROM users WHERE id="+str(i.id))
