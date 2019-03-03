@@ -119,6 +119,9 @@ class User_Command(commands.Cog):
             await ctx.send("User doesn't exist. Tell them to use the inventory command papa!")
             return
         t=int(x[0][0])+int(args)
+        if(y[0][0]>=5):
+            await ctx.send("You have reached the max level")
+            return
         while(t>20):
             await conn.execute("UPDATE users SET extraction ="+str(y[0][0]+1)+" WHERE id=" + str(ctx.message.mentions[0].id))
             t-=20
@@ -139,6 +142,8 @@ class User_Command(commands.Cog):
             await ctx.send("User doesn't exist. Tell them to use the inventory command papa!")
             return
         t=int(x[0][0])+int(args)
+        if(y[0][0]>=5):
+            await ctx.send("You have reached the max level")
         while(t>20):
             await conn.execute("UPDATE users SET smithing ="+str(y[0][0]+1)+" WHERE id=" + str(ctx.message.mentions[0].id))
             t-=20
