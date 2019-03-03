@@ -82,8 +82,9 @@ class User_Command(commands.Cog):
         conn = await asyncpg.connect(DATABASE_URL)
         x=await conn.fetch("SELECT money FROM users WHERE id="+str(ctx.message.mentions[0].id))
         y=await conn.fetch("UPDATE users SET money ="+ str(int(args)+x[0][0])+" WHERE id=" + str(ctx.message.author.id))
-        await ctx.send("Money added Papa")
         await conn.close()
+
+        await ctx.send("Money added Papa")
 
     @commands.group()
     async def level(self, ctx):
@@ -98,7 +99,6 @@ class User_Command(commands.Cog):
         t=x[0][0]+1
         if(t%20==0):
             await ctx.mentions[0].send("You have leveled up! Higher quality actions are now possible")
-
         y=await conn.fetch("UPDATE users SET sxtraction ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
         await ctx,send("Level Up! Papa")
         await conn.close()
