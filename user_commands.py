@@ -92,15 +92,21 @@ class User_Command(commands.Cog):
 
     @level.command(name="extraction")
     @commands.check(basic_check)
-    async def level_ex(self,ctx):
+    async def level_ex(self,ctx,args=1):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
-        x=await conn.fetch("SELECT sxtraction FROM users WHERE id="+str(ctx.message.mentions[0].id))
-        t=x[0][0]+1
-        if(t%20==0):
-            await ctx.mentions[0].send("You have leveled up! Higher quality actions are now possible")
-        y=await conn.fetch("UPDATE users SET sxtraction ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
-        await ctx.send("Level Up! Papa")
+        x=await conn.fetch("SELECT excexp FROM users WHERE id="+str(ctx.message.mentions[0].id))
+        y=await conn.fetch("SELECT extraction FROM users WHERE id="+str(ctx.message.mentions[0].id))
+        if(len(x)==0):
+            await ctx.send("User doesn't exist. Tell them to use the inventory command papa!")
+            return
+        t=int(x[0][0])+int(args)
+        while(t>20):
+            await conn.execute("UPDATE users SET extraction ="+str(y[0][0]+1)+" WHERE id=" + str(ctx.message.author.id))
+            t-=20
+            await ctx.message.mentions[0].send("You have leveled up! Higher quality actions are now possible")
+        y=await conn.fetch("UPDATE users SET excexp ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
+        await ctx.send("Exp Up! Papa")
         await conn.close()
 
     @level.command(name="smithing")
