@@ -67,7 +67,7 @@ class User_Command(commands.Cog):
             else:
                 for j in i[2]:
                     w+=j+"\n"
-            x.add_field(name="Items:", value=w,inline=False)\
+            x.add_field(name="Items:", value=w,inline=False)
             
         await ctx.send(embed=x)
 
