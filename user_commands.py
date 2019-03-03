@@ -72,14 +72,16 @@ class User_Command(commands.Cog):
             
         await ctx.send(embed=x)
 
-##    @commands.command()
-##    async def throw(self, ctx):
-##        DATABASE_URL = os.environ['DATABASE_URL']
-##        conn = await asyncpg.connect(DATABASE_URL)
-##        y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
-##        for i in y:
-##            for j in i.split()
-##        await conn.close()
+    @commands.command()
+    async def throw(self, ctx,arg):
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
+        for i in y:
+            for j in i.split("|"):
+                k= j.split(":")
+                await ctx.send(k[0])
+        await conn.close()
 
     @commands.group()
     async def money(self, ctx):
