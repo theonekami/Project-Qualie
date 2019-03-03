@@ -180,7 +180,7 @@ async def purge(ctx,args):
 async def test(ctx):
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = await asyncpg.connect(DATABASE_URL)
-    x= await conn.fetch("""Create table item_list (name  varchar,disc varchar , price int)""")
+    x= await conn.fetch("""TRUNCATE TABLE ITEMS""")
     await ctx.send(x)
     await conn.close()
 
