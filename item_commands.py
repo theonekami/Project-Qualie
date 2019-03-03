@@ -106,13 +106,13 @@ class Item_Command(commands.Cog):
         t=y[0][0]-v[0][2]
         
         q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(ctx.message.author.id))
-        if not(q):
+        if not(q[0][0]):
             q="'"
-        q+=v[0][0]+","
-        q+="'"
+        q[0][0]+=v[0][0]+","
+  
         await ctx.send(q)
         w=await conn.fetch("UPDATE users SET money ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
-        w=await conn.fetch("UPDATE users SET items ="+ str(q)+" WHERE id=" + str(ctx.message.author.id))
+        w=await conn.fetch("UPDATE users SET items ='"+ str(q)+" ' WHERE id=" + str(ctx.message.author.id))
 
                                                                                  
         if(v[0][3]==False):
