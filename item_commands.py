@@ -124,7 +124,7 @@ class Item_Command(commands.Cog):
     @commands.check(basic_check)
     async def give_item(self,ctx):
         rew=await self.bot.wait_for("message",timeout=120)
-        ctx.send(rew)
+        await ctx.send(rew)
 ##        DATABASE_URL = os.environ['DATABASE_URL']
 ##        conn = await asyncpg.connect(DATABASE_URL)
 ##        men=ctx.message.mentions
