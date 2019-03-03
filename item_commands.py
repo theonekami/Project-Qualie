@@ -140,7 +140,7 @@ class Item_Command(commands.Cog):
                     z=rew[0] +":"+ rew[1]+"|"
                 else:
                     z=q[0][0]+rew[0] +":"+ rew[1]+"|"
-                w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
+                w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(i.id))
 ##                await i.send("You have gotten" + )
         elif(rol):
             for i in rol:
@@ -152,7 +152,7 @@ class Item_Command(commands.Cog):
                     z=rew[0] +":"+ rew[1]+"|"
                 else:
                     z=q[0][0]+rew[0] +":"+ rew[1]+"|"
-                w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
+                w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(i.id))
 
         await conn.close()
         await ctx.send("Gave Item papa!")
