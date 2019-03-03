@@ -107,10 +107,14 @@ class Item_Command(commands.Cog):
         
         q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(ctx.message.author.id))
         if not(q):
-            q=""
-        q+=v[0][0]+","
+            q="'"
+        q+=v[0][0]+","'
+        q+="'"
+        await ctx.send(q)
         w=await conn.fetch("UPDATE users SET money ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
         w=await conn.fetch("UPDATE users SET items ="+ str(q)+" WHERE id=" + str(ctx.message.author.id))
+
+                                                                                 
         if(v[0][3]==False):
             await conn.fetch("DELETE FROM ITEMS WHERE NAME=" +str(v[0][0]))
         await ctx.send("Success")
