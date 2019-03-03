@@ -123,7 +123,7 @@ class Item_Command(commands.Cog):
             if(t==0):
                 await conn.fetch("DELETE FROM items WHERE name='" +str(v[0][0])+"'")
             else:
-                await conn.fetch("UPDATE items SET stock =" + str(t) +"WHERE name =" + v[0][0])
+                await conn.fetch("UPDATE items SET stock =" + str(t) +"WHERE name ='" + v[0][0]+"'")
         await ctx.send("Success")
         await conn.close()
 
