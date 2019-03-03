@@ -126,30 +126,31 @@ class Item_Command(commands.Cog):
         await ctx.send("What item are you gonna give papa?")
         rew=await self.bot.wait_for("message",timeout=120)
         await ctx.send(rew)
-##        DATABASE_URL = os.environ['DATABASE_URL']
-##        conn = await asyncpg.connect(DATABASE_URL)
-##        men=ctx.message.mentions
-##        rol=ctx.message.role_mentions
-##        if(men):
-##            for i in men:
-##                q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
-##                if(q[0][0]==None):
-##                    z=v[0][0]+"|"
-##                else:
-##                    z=q[0][0]+v[0][0]+"|"
-##                w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
-####                await i.send("You have gotten" + )
-##        elif(rol):
-##            for i in rol.members:
-##                q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
-##                if(q[0][0]==None):
-##                    z=v[0][0]+"|"
-##                else:
-##                    z=q[0][0]+v[0][0]+"|"
-##                w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
-##
-##        await conn.close()
-##        await ctx.send("Gave Item papa!")
+        rew=rew.content.split(",")
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        men=ctx.message.mentions
+        rol=ctx.message.role_mentions
+        if(men):
+            for i in men:
+                q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
+                if(q[0][0]==None):
+                    z=v[0][0] +":"+ v[0][1]+"|"
+                else:
+                    z=q[0][0]+v[0][0] +":"+ v[0][1]+"|"
+                w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
+##                await i.send("You have gotten" + )
+        elif(rol):
+            for i in rol.members:
+                q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
+                if(q[0][0]==None):
+                    z=v[0][0] +":"+ v[0][1]+"|"
+                else:
+                    z=q[0][0]+v[0][0] +":"+ v[0][1]+"|"
+                w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
+
+        await conn.close()
+        await ctx.send("Gave Item papa!")
 
     @commands.command()
     async def shop(self, ctx):
