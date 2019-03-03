@@ -130,10 +130,12 @@ class Item_Command(commands.Cog):
         conn = await asyncpg.connect(DATABASE_URL)
         men=ctx.message.mentions
         rol=ctx.message.role_mentions[0].members
-        await ctx.send(rol)
         if(men):
             for i in men:
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
+                if(len(q)==0):
+                    await ctx.send("Could not give to " + str(i.name))
+                    continue
                 if(q[0][0]==None):
                     z=rew[0] +":"+ rew[1]+"|"
                 else:
@@ -143,6 +145,9 @@ class Item_Command(commands.Cog):
         elif(rol):
             for i in rol:
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
+                if(len(q)==0):
+                    await ctx.send("Could not give to " + str(i.name))
+                    continue
                 if(q[0][0]==None):
                     z=rew[0] +":"+ rew[1]+"|"
                 else:
