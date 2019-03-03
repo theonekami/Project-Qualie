@@ -90,7 +90,7 @@ class User_Command(commands.Cog):
     async def level(self, ctx):
         pass
 
-    @money.command(name="extraction")
+    @level.command(name="extraction")
     @commands.check(basic_check)
     async def level_ex(self,ctx):
         DATABASE_URL = os.environ['DATABASE_URL']
