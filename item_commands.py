@@ -111,7 +111,6 @@ class Item_Command(commands.Cog):
         else:
             z=q[0][0]+v[0][0]+"|"
   
-        await ctx.send(q)
         w=await conn.fetch("UPDATE users SET money ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
         w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
 
