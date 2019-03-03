@@ -54,13 +54,13 @@ class User_Command(commands.Cog):
         else:
             await ctx.send("Fetching for ")
         await conn.close()
-        x= discord.Embed(title= "Info!")
 
         for i in y:
             t=self.bot.get_user(id=i[0])
-            x.add_field(name="Money" ,value="gem"+str(i[1]), inline=True)
-            x.add_field(name="Smithing level", value=str(i[3]),inline=True)
-            x.add_field(name="Extraction level", value=str(i[4]),inline=True)
+            x= discord.Embed(title= t.name)
+            x.add_field(name="Money:" ,value=":gem: -"+str(i[1]), inline=True)
+            x.add_field(name="Smithing level:", value=str(i[3]),inline=True)
+            x.add_field(name="Extraction level:", value=str(i[4]),inline=True)
             w=""
             if i[2]==None:
                 w="None"
@@ -81,8 +81,9 @@ class User_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         x=await conn.fetch("SELECT money FROM users WHERE id="+str(ctx.message.mentions[0].id))
+        x[]
         y=await conn.fetch("UPDATE users SET money ="+ str(args)+" WHERE id=" + str(ctx.message.author.id))
-        
+        await conn.close()
 
   
         
