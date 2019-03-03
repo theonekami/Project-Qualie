@@ -81,11 +81,18 @@ class User_Command(commands.Cog):
     async def money_add(self,ctx,args):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
-        for i in ctx.message.mentions:
-            x=await conn.fetch("SELECT money FROM users WHERE id="+str(i.id))
-            y=await conn.fetch("UPDATE users SET money ="+ str(int(args)+x[0][0])+" WHERE id=" + str(i.id))
-        await conn.close()
+        men=ctx.message.mentions
+        rol=ctx.message.role_mentions
+        if(men):
+            for i in men:
+                x=await conn.fetch("SELECT money FROM users WHERE id="+str(i.id))
+                y=await conn.fetch("UPDATE users SET money ="+ str(int(args)+x[0][0])+" WHERE id=" + str(i.id))
 
+        elif(rol):
+            for i in rol:
+                x=await conn.fetch("SELECT money FROM users WHERE id="+str(i.id))
+                y=await conn.fetch("UPDATE users SET money ="+ str(int(args)+x[0][0])+" WHERE id=" + str(i.id))
+        await conn.close()
         await ctx.send("Money added Papa")
 
     @commands.group()

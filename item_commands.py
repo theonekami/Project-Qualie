@@ -140,7 +140,7 @@ class Item_Command(commands.Cog):
                 w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(ctx.message.author.id))
 ##                await i.send("You have gotten" + )
         elif(rol):
-            for i in rol.members:
+            for i in rol:
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
                 if(q[0][0]==None):
                     z=v[0][0] +":"+ v[0][1]+"|"
