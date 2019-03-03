@@ -66,7 +66,7 @@ class User_Command(commands.Cog):
                 w="None"
             else:
                 u=i[2].split("|")
-                for j in i[2]:
+                for j in u:
                     w+=j+"\n"
             x.add_field(name="Items:", value=w,inline=False)
             
