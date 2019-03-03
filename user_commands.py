@@ -38,8 +38,11 @@ class User_Command(commands.Cog):
             x.add_field(name="Smithing level", value=str(i[3]),inline=True)
             x.add_field(name="Extraction level", value=str(i[4]),inline=True)
             w=""
-            for j in i[2]:
-                w+=j+"\n"
+            if j==None:
+                w="None"
+            else:
+                for j in i[2]:
+                    w+=j+"\n"
             x.add_field(name="Items:", value=w,inline=False)\
             
         await ctx.send(embed=x)
