@@ -81,7 +81,7 @@ class User_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         x=await conn.fetch("SELECT money FROM users WHERE id="+str(ctx.message.mentions[0].id))
-        x[]
+        await ctx.send(x)
         y=await conn.fetch("UPDATE users SET money ="+ str(args)+" WHERE id=" + str(ctx.message.author.id))
         await conn.close()
 
