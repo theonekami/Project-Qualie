@@ -111,7 +111,7 @@ class Item_Command(commands.Cog):
         q+=v[0][0]+","
         await conn.execute("UPDATE users SET money ="+ str(t)+" WHERE id=" + str(ctx.message.author.id))
         await conn.execute("UPDATE users SET items ="+ str(q)+" WHERE id=" + str(ctx.message.author.id))
-        if(v[3]==False):
+        if(v[0][3]==False):
             await conn.fetch("DELETE FROM ITEMS WHERE NAME=" +str(v[0][0]))
         await ctx.send("Success")
         await conn.close()
