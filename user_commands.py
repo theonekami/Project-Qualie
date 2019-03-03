@@ -49,7 +49,7 @@ class User_Command(commands.Cog):
         y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
         if(len(y) == 0):
             await ctx.send("creating new user")
-            await conn.execute("INSERT INTO USERS (id, money, smithing, sxtraction,smithexp,excexp) VALUES('" + str(ctx.message.author.id)+ "',0,1,1,0,0)")
+            await conn.execute("INSERT INTO USERS (id, money, smithing, extraction,smithexp,excexp) VALUES('" + str(ctx.message.author.id)+ "',0,1,1,0,0)")
             y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
         else:
             await ctx.send("Fetching for ")
