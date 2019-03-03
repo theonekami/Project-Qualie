@@ -93,7 +93,7 @@ class Item_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         v= await conn.fetch(ex)
-        y=await conn.fetch("SELECT MONEY FROM USERS WHERE ID=" +ctx.message.author.id)
+        y=await conn.fetch("SELECT MONEY FROM USERS WHERE ID=" +str(ctx.message.author.id))
         x= discord.Embed(title= "Info!")
         x.add_field(name="Transaction",value="Do you want to buy "+v[0][0]+ " for :gem:" + v[0][2]+"?")
         await ctx.send(embed=x)
