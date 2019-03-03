@@ -129,7 +129,7 @@ class Item_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         men=ctx.message.mentions
-        rol=ctx.message.role_mentions
+        rol=ctx.message.role_mentions[0].members
         if(men):
             for i in men:
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
