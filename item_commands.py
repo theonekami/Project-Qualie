@@ -55,7 +55,7 @@ class Item_Command(commands.Cog):
             await ctx.send("Wrong syntax papa")
             return
             
-        ex="INSERT INTO items(name, disc, price, presence) VALUES("+ "'"+args[0]+"'"+","+"'"+args[1]+"'" +","+args[2]+","+args[3]+")"
+        ex="INSERT INTO items(name, disc, price, presence) VALUES("+ "'"+args[0].strip()+"'"+","+"'"+args[1]+"'" +","+args[2]+","+args[3]+")"
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         await conn.execute(ex)
