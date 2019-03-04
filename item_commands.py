@@ -124,11 +124,13 @@ class Item_Command(commands.Cog):
             x= discord.Embed(title= "Error!")
             x.add_field(name=":(",value="You declined Sir")
             await ctx.send(embed=x)
+            await conn.close()
             return
         if(y[0][0]<v[0][2]):
             x= discord.Embed(title= "Error!")
             x.add_field(name=":(",value="You don't have enough to buy this item Sir")
             await ctx.send(embed=x)
+            await conn.close()
             return
         t=y[0][0]-v[0][2]
         
