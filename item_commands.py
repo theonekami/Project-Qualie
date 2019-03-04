@@ -120,7 +120,7 @@ class Item_Command(commands.Cog):
         x.add_field(name="Transaction",value="Do you want to buy "+v[0][0]+ " for :gem:" + str(v[0][2])+"?")
         await ctx.send(embed=x)
         t= await self.bot.wait_for("message",timeout=120,check=accept)
-        if(t.lower()=="n" or t.lower()=="NO"):
+        if(t.content.lower()=="n" or t.content.lower()=="NO"):
             x= discord.Embed(title= "Error!")
             x.add_field(name=":(",value="You declined Sir")
             await ctx.send(embed=x)
