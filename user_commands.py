@@ -81,10 +81,12 @@ class User_Command(commands.Cog):
             t=i[0]
             for j in i[0].split("|"):
                 k= j.split(":")
-                if(k==args):
+                if(k[0]==args):
+                    await ctx,.send(k[0])
                     t=t.replace(j+"|","")
         y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
         await conn.close()
+        await ctx.send("Thrown!")
 
     @commands.group()
     async def money(self, ctx):
