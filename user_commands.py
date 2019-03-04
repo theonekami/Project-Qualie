@@ -80,7 +80,7 @@ class User_Command(commands.Cog):
         for i in y:
             for j in i[0].split("|"):
                 k= j.split(":")
-                await ctx.send(k[0])
+                
         await conn.close()
 
     @commands.group()

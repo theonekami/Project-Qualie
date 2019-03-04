@@ -31,7 +31,7 @@ def basic_check(ctx):  ##for funsies
 
 def accept(a):
     a=a.content.lower()
-    y=["y","yes"]
+    y=["y","yes","n","no"]
     return a in y
 
 class Item_Command(commands.Cog):
@@ -119,7 +119,12 @@ class Item_Command(commands.Cog):
         x= discord.Embed(title= "Info!")
         x.add_field(name="Transaction",value="Do you want to buy "+v[0][0]+ " for :gem:" + str(v[0][2])+"?")
         await ctx.send(embed=x)
-        await self.bot.wait_for("message",timeout=120,check=accept)
+        t= await self.bot.wait_for("message",timeout=120,check=accept)
+        if(t.lower()=="n" or t.lower()=="NO"):
+            x= discord.Embed(title= "Error!")
+            x.add_field(name=":(",value="You declined Sir")
+            await ctx.send(embed=x)
+            return
         if(y[0][0]<v[0][2]):
             x= discord.Embed(title= "Error!")
             x.add_field(name=":(",value="You don't have enough to buy this item Sir")
