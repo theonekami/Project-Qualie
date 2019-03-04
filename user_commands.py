@@ -73,14 +73,16 @@ class User_Command(commands.Cog):
         await ctx.send(embed=x)
 
     @commands.command()
-    async def throw(self, ctx,arg):
+    async def throw(self, ctx,args):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
         for i in y:
             for j in i[0].split("|"):
                 k= j.split(":")
-                
+                if(k==args):
+                    args=args.replace(j+"|","")
+        y=await conn.fetch("UPDATE USERS SET ITEMS='" + t+"')")
         await conn.close()
 
     @commands.group()
