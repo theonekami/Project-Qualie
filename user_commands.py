@@ -83,7 +83,7 @@ class User_Command(commands.Cog):
                 k= j.split(":")
                 if(k==args):
                     t=t.replace(j+"|","")
-        y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"')")
+        y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
         await conn.close()
 
     @commands.group()
