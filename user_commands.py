@@ -82,6 +82,7 @@ class User_Command(commands.Cog):
             await ctx.send(t)
             for j in i[0].split("|"):
                 k= j.split(":")
+                await ctx.send(k)
                 if(k[0]==args):
                     await ctx.send(k[0])
                     t=t.replace(j+"|","")
