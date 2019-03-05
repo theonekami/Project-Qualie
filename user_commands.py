@@ -51,8 +51,6 @@ class User_Command(commands.Cog):
             await ctx.send("creating new user")
             await conn.execute("INSERT INTO USERS (id, money, smithing, extraction,smithexp,excexp) VALUES('" + str(ctx.message.author.id)+ "',0,1,1,0,0)")
             y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
-        else:
-            await ctx.send("Fetching for ")
         await conn.close()
 
         for i in y:
@@ -79,7 +77,6 @@ class User_Command(commands.Cog):
         y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
         for i in y:
             t=i[0]
-            await ctx.send(t)
             for j in i[0].split("|"):
                 k= j.split(":")
                 if(k[0].strip()==args):
@@ -87,6 +84,22 @@ class User_Command(commands.Cog):
         y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
         await conn.close()
         await ctx.send("Thrown!")
+
+    @commands.command()
+    async def use(self, ctx,args):
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
+        for i in y:
+            z=i[0]
+            for j in i[0].split("|"):
+                k= j.split(":")
+                if(k[0].strip()==args):
+                    t=z.replace(j+"|","")
+        y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
+        await conn.close()
+        x=discord.Embed(title="Sucess")
+        x.add_field(name="Good Job", value="You have used " + z[0])
 
     @commands.group()
     async def money(self, ctx):
