@@ -51,6 +51,8 @@ class User_Command(commands.Cog):
             await ctx.send("creating new user")
             await conn.execute("INSERT INTO USERS (id, money, smithing, extraction,smithexp,excexp) VALUES('" + str(ctx.message.author.id)+ "',0,1,1,0,0)")
             y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
+        else:
+            await ctx.send("Fetching for" + ctx.message.author.name)
         await conn.close()
 
         for i in y:
