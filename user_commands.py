@@ -99,9 +99,10 @@ class User_Command(commands.Cog):
                 if(k[0].strip()==args):
                     t=z.replace(j+"|","")
                     z=t
-                    if (len(t)==0):
-                        t="NULL"
-        y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
+        if (len(t)==0):
+            y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL" )
+        else:
+            y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
         await conn.close()
         x=discord.Embed(title="Sucess")
         x.add_field(name="Good Job", value="You have used " + z)
