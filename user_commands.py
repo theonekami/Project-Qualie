@@ -83,7 +83,7 @@ class User_Command(commands.Cog):
             for j in i[0].split("|"):
                 k= j.split(":")
                 if(k[0].strip()==args):
-                    t=t.replace(j+"|"," s")
+                    t=t.replace(j+"|","")
         if (len(t)==0):
             y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL" )
         else:
