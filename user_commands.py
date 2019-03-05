@@ -83,7 +83,7 @@ class User_Command(commands.Cog):
             for j in i[0].split("|"):
                 k= j.split(":")
                 await ctx.send(k)
-                if(k[0]==args):
+                if(k[0].strip()==args):
                     await ctx.send(k[0])
                     t=t.replace(j+"|","")
         y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
