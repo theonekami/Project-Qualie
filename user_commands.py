@@ -52,7 +52,7 @@ class User_Command(commands.Cog):
             await conn.execute("INSERT INTO USERS (id, money, smithing, extraction,smithexp,excexp) VALUES('" + str(ctx.message.author.id)+ "',0,1,1,0,0)")
             y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
         else:
-            await ctx.send("Fetching for" + ctx.message.author.name)
+            await ctx.send("Fetching for " + ctx.message.author.name)
         await conn.close()
 
         for i in y:
@@ -62,7 +62,7 @@ class User_Command(commands.Cog):
             x.add_field(name="Smithing level:", value=str(i[3]),inline=True)
             x.add_field(name="Extraction level:", value=str(i[4]),inline=True)
             w=""
-            if i[2]==None or i[2]=="":
+            if i[2]==None or i[2]=="''":
                 w="None"
             else:
                 u=i[2].split("|")
@@ -77,6 +77,7 @@ class User_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
+        t=""
         for i in y:
             t=i[0]
             for j in i[0].split("|"):
@@ -95,6 +96,7 @@ class User_Command(commands.Cog):
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
+        t=""
         for i in y:
             z=i[0]
             for j in i[0].split("|"):
