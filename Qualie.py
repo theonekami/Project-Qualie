@@ -177,10 +177,10 @@ async def purge(ctx,args):
     await x.delete()
 
 @client.command()
-async def test(ctx):
+async def test(ctx,*,args):
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = await asyncpg.connect(DATABASE_URL)
-    x= await conn.fetch("""TRUNCATE TABLE ITEM_LIST""")
+    x= await conn.fetch()
     await ctx.send(x)
     await conn.close()
 
