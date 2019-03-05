@@ -79,6 +79,7 @@ class User_Command(commands.Cog):
         y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
         for i in y:
             t=i[0]
+            await ctx.send(t)
             for j in i[0].split("|"):
                 k= j.split(":")
                 if(k[0]==args):
