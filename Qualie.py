@@ -155,7 +155,7 @@ async def pfp(ctx):
 @client.command()
 @commands.check(basic_check)
 async def check(ctx):
-    ctx.send(str(ctx.message.mentions[0].created_at))
+    await ctx.send(str(ctx.message.mentions[0].created_at))
 
 @client.command()
 async def avatar(ctx):
