@@ -180,7 +180,7 @@ async def purge(ctx,args):
 async def test(ctx,*,args):
     DATABASE_URL = os.environ['DATABASE_URL']
     conn = await asyncpg.connect(DATABASE_URL)
-    x= await conn.fetch()
+    x= await conn.fetch(args)
     await ctx.send(x)
     await conn.close()
 
