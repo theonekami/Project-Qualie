@@ -81,6 +81,8 @@ class User_Command(commands.Cog):
                 k= j.split(":")
                 if(k[0].strip()==args):
                     t=t.replace(j+"|","")
+                    if (len(t)==0):
+                        t="NULL"
         y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
         await conn.close()
         await ctx.send("Thrown!")
@@ -97,6 +99,8 @@ class User_Command(commands.Cog):
                 if(k[0].strip()==args):
                     t=z.replace(j+"|","")
                     z=t
+                    if (len(t)==0):
+                        t="NULL"
         y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
         await conn.close()
         x=discord.Embed(title="Sucess")
