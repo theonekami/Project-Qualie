@@ -153,6 +153,11 @@ async def pfp(ctx):
     await ctx.send(embed=em)
 
 @client.command()
+@commands.check(basic_check)
+async def check(ctx):
+    ctx.send(str(ctx.mentions.created_at))
+
+@client.command()
 async def avatar(ctx):
     em = discord.Embed(title="Old Face")
     em.set_image(url=ctx.message.author.avatar_url)
