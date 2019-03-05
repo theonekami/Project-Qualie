@@ -101,7 +101,7 @@ class User_Command(commands.Cog):
         await conn.close()
         x=discord.Embed(title="Sucess")
         x.add_field(name="Good Job", value="You have used " + z)
-        await ctx.send(embedx)
+        await ctx.send(embed=x)
 
     @commands.group()
     async def money(self, ctx):
