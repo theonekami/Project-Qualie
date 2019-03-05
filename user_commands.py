@@ -60,7 +60,7 @@ class User_Command(commands.Cog):
             x.add_field(name="Smithing level:", value=str(i[3]),inline=True)
             x.add_field(name="Extraction level:", value=str(i[4]),inline=True)
             w=""
-            if i[2]==None:
+            if i[2]==None or i[2]=="":
                 w="None"
             else:
                 u=i[2].split("|")
