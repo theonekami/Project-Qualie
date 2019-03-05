@@ -96,11 +96,12 @@ class User_Command(commands.Cog):
                 k= j.split(":")
                 if(k[0].strip()==args):
                     t=z.replace(j+"|","")
+                    z=t
         y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
         await conn.close()
         x=discord.Embed(title="Sucess")
-        x.add_field(name="Good Job", value="You have used " + z[0])
-        await ctx.send(embed=x)
+        x.add_field(name="Good Job", value="You have used " + z)
+        await ctx.send(embedx)
 
     @commands.group()
     async def money(self, ctx):
