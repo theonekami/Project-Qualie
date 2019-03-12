@@ -64,6 +64,8 @@ async def on_member_join(member):
     y="Hello" + member.mention
     em = discord.Embed(title="New Face")
     em.set_image(url=member.avatar_url)
+    if member.bot:
+        return
     await x.send(y)
     await x.send(embed=em)
 
