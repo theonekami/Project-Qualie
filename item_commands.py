@@ -75,9 +75,9 @@ class Item_Command(commands.Cog):
         ex="INSERT INTO items(name, disc, price, stock) VALUES("+ "'"+args[0].strip().replace("'","''")+"'"+","+"'"+args[1].strip().replace("'","''")+"'" +","+args[2]+","+args[3]+")"
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
-        await ctx.send(ex)
+
         await conn.execute(ex)
-        w= await conn.fetch("SELECT * FROM ITEM_LIST WHERE NAME='"+args[0].strip()+"'")
+        w= await conn.fetch("SELECT * FROM ITEM_LIST WHERE NAME='"+args[0].strip().replace("'","''")+"'")
         if(not(w)):
             await conn.execute("INSERT INTO item_list(name, disc,price) VALUES('"+args[0].strip().replace("'","''")+"'"+","+"'"+args[1].strip().replace("'","''")+"'" +","+args[2]+")")
         await conn.close()
