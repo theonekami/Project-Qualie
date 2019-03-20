@@ -87,7 +87,7 @@ class Item_Command(commands.Cog):
     @item.command(name="delete")
     @commands.check(basic_check)
     async def delete_item(self,ctx,*,args):
-        ex="DELETE FROM items WHERE( name= '"+args..strip().replace("'","''")+"'"+")"
+        ex="DELETE FROM items WHERE( name= '"+args.strip().replace("'","''")+"'"+")"
         ex2="DELETE FROM item_list WHERE( name= '"+args.strip().replace("'","''")+"'"+")"
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
