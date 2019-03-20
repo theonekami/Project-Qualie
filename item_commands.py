@@ -79,7 +79,7 @@ class Item_Command(commands.Cog):
         await conn.execute(ex)
         w= await conn.fetch("SELECT * FROM ITEM_LIST WHERE NAME='"+args[0].strip()+"'")
         if(not(w)):
-            await conn.execute("INSERT INTO item_list(name, disc,price) VALUES('"+args[0].strip()+"'"+","+"'"+args[1]+"'" +","+args[2]+")")
+            await conn.execute("INSERT INTO item_list(name, disc,price) VALUES('"+args[0].strip().replace("'","''")+"'"+","+"'"+args[1].strip().replace("'","''")+"'" +","+args[2]+")")
         await conn.close()
         await ctx.send("Inserted Item papa!")
 
