@@ -72,7 +72,7 @@ class Item_Command(commands.Cog):
             await ctx.send("You put zero, which might end up as an error papa")
             return
             
-        ex="INSERT INTO items(name, disc, price, stock) VALUES("+ "'"+args[0].strip()+"'"+","+"'"+args[1]+"'" +","+args[2]+","+args[3]+")"
+        ex="INSERT INTO items(name, disc, price, stock) VALUES("+ "'"+args[0].strip().replace("'","''")+"'"+","+"'"+args[1].strip().replace("'","''")+"'" +","+args[2]+","+args[3]+")"
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         await conn.execute(ex)
