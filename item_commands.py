@@ -170,27 +170,26 @@ class Item_Command(commands.Cog):
             for i in men:
                 w=await conn.fetch("SELECT NAME ,disc FROM ITEM_LIST WHERE NAME='"+ rew.content.strip().replace("'","''")+"'")
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
-                await ctx.send(w)
                 if(len(q)==0):
                     await ctx.send("Could not give to " + str(i.name))
                     continue
                 if(q[0][0]==None):
-                    z=w[0][0] +":"+ w[0][1]+"|"
+                    z=w[0][0].strip().replace("'","''") +":"+ w[0][1].strip().replace("'","''")+"|"
                 else:
-                    z=q[0][0]+w[0][0] +":"+ w[0][1]+"|"
+                    z=q[0][0]+w[0][0].strip().replace("'","''") +":"+ w[0][1.strip().replace("'","''")]+"|"
                 w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(i.id))
 ##                await i.send("You have gotten" + )
         elif(rol):
             for i in rol[0].members:
-                w=await conn.fetch("SELECT NAME ,disc FROM ITEM_LIST WHERE NAME='"+ str(rew.content).strip().replace("'","''")+"'")
+                w=await conn.fetch("SELECT NAME ,disc FROM ITEM_LIST WHERE NAME='"+ rew.content.strip().replace("'","''")+"'")
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
                 if(len(q)==0):
                     await ctx.send("Could not give to " + str(i.name))
                     continue
                 if(q[0][0]==None):
-                    z=w[0][0] +":"+ w[0][1]+"|"
+                    z=w[0][0].strip().replace("'","''") +":"+ w[0][1].strip().replace("'","''")+"|"
                 else:
-                    z=q[0][0]+w[0][0] +":"+ w[0][1]+"|"
+                    z=q[0][0]+w[0][0].strip().replace("'","''") +":"+ w[0][1.strip().replace("'","''")]+"|"
                 w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(i.id))
 
         await conn.close()
