@@ -157,28 +157,29 @@ class Item_Command(commands.Cog):
 
     @item.command(name="give")
     @commands.check(basic_check)
-    async def give_item(self,ctx):
-        await ctx.send("What item are you gonna give papa?")
-        rew=await self.bot.wait_for("message",timeout=120)
-        rew=rew.content.split(",")
+    async def give_item(self,ctx,args):
+
+
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         men=ctx.message.mentions
         rol=ctx.message.role_mentions
         if(men):
             for i in men:
+                w=wait conn.fetch("SELECT NAME ,disc FROM ITEM_LIST WHERE NAME='"+ str(args)+"'")
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
                 if(len(q)==0):
                     await ctx.send("Could not give to " + str(i.name))
                     continue
                 if(q[0][0]==None):
-                    z=rew[0] +":"+ rew[1]+"|"
+                    z=w[0][0] +":"+ w[0][1]+"|"
                 else:
-                    z=q[0][0]+rew[0] +":"+ rew[1]+"|"
+                    z=q[0][0]+w[0][0] +":"+ w[0][1]+"|"
                 w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(i.id))
 ##                await i.send("You have gotten" + )
         elif(rol):
             for i in rol[0].members:
+                w=wait conn.fetch("SELECT NAME ,disc FROM ITEM_LIST WHERE NAME='"+ str(args)+"'")
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
                 if(len(q)==0):
                     await ctx.send("Could not give to " + str(i.name))
