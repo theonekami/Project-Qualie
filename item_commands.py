@@ -46,7 +46,7 @@ class Item_Command(commands.Cog):
     @item.command(name="list")
     @commands.check(basic_check)
     async def list_item(self,ctx):
-        ex="SELECT * FROM item_list"
+        ex="SELECT * FROM item_list order by name"
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
         v= await conn.fetch(ex)
