@@ -160,7 +160,7 @@ class Item_Command(commands.Cog):
     async def give_item(self,ctx):
         await ctx.send("What item are you gonna give papa?")
         rew=await self.bot.wait_for("message",timeout=120)
-        await ctx.send(rew)
+        await ctx.send(rew.content)
 
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
