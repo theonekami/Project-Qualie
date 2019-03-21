@@ -176,7 +176,7 @@ class Item_Command(commands.Cog):
                 if(q[0][0]==None):
                     z=w[0][0].strip().replace("'","''") +":"+ w[0][1].strip().replace("'","''")+"|"
                 else:
-                    z=q[0][0]+w[0][0].strip().replace("'","''") +":"+ w[0][1.strip().replace("'","''")]+"|"
+                    z=q[0][0]+w[0][0].strip().replace("'","''") +":"+ w[0][1].strip().replace("'","''")+"|"
                 w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(i.id))
 ##                await i.send("You have gotten" + )
         elif(rol):
@@ -189,7 +189,7 @@ class Item_Command(commands.Cog):
                 if(q[0][0]==None):
                     z=w[0][0].strip().replace("'","''") +":"+ w[0][1].strip().replace("'","''")+"|"
                 else:
-                    z=q[0][0]+w[0][0].strip().replace("'","''") +":"+ w[0][1.strip().replace("'","''")]+"|"
+                    z=q[0][0]+w[0][0].strip().replace("'","''") +":"+ w[0][1].strip().replace("'","''")+"|"
                 w=await conn.fetch("UPDATE users SET items ='"+ str(z)+" ' WHERE id=" + str(i.id))
 
         await conn.close()
