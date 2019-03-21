@@ -166,7 +166,7 @@ class Item_Command(commands.Cog):
         rol=ctx.message.role_mentions
         if(men):
             for i in men:
-                w=await conn.fetch("SELECT NAME ,disc FROM ITEM_LIST WHERE NAME='"+ str(args)+"'")
+                w=await conn.fetch("SELECT NAME ,disc FROM ITEM_LIST WHERE NAME='"+ str(args).strip().replace("'","''")+"'")
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
                 if(len(q)==0):
                     await ctx.send("Could not give to " + str(i.name))
@@ -179,7 +179,7 @@ class Item_Command(commands.Cog):
 ##                await i.send("You have gotten" + )
         elif(rol):
             for i in rol[0].members:
-                w=await conn.fetch("SELECT NAME ,disc FROM ITEM_LIST WHERE NAME='"+ str(args)+"'")
+                w=await conn.fetch("SELECT NAME ,disc FROM ITEM_LIST WHERE NAME='"+ str(args).strip().replace("'","''")+"'")
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
                 if(len(q)==0):
                     await ctx.send("Could not give to " + str(i.name))
