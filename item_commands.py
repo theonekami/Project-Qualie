@@ -174,9 +174,9 @@ class Item_Command(commands.Cog):
                     await ctx.send("Could not give to " + str(i.name))
                     continue
                 if(q[0][0]==None):
-                    z=w[0][0].strip().replace("'","''") +":"+ w[0][1].strip().replace("'","''")+"|"
+                    z=w[0][0].strip()+":"+ w[0][1].strip()+"|"
                 else:
-                    z=q[0][0]+w[0][0].strip().replace("'","''") +":"+ w[0][1].strip().replace("'","''")+"|"
+                    z=q[0][0]+w[0][0].strip() +":"+ w[0][1].strip()+"|"
                 e=await conn.fetch("UPDATE users SET items ='"+ str(z).replace("'","''")+" ' WHERE id=" + str(i.id))
 ##                await i.send("You have gotten" + )
         elif(rol):
