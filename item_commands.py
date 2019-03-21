@@ -168,7 +168,7 @@ class Item_Command(commands.Cog):
             for i in men:
                 w=await conn.fetch("SELECT NAME ,disc FROM ITEM_LIST WHERE NAME='"+ str(args).strip().replace("'","''")+"'")
                 q=await conn.fetch("SELECT items FROM USERS WHERE ID=" +str(i.id))
-                await ctx.send(w[0][0])
+                await ctx.send(w[0])
                 if(len(q)==0):
                     await ctx.send("Could not give to " + str(i.name))
                     continue
