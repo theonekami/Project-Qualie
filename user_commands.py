@@ -88,11 +88,50 @@ class User_Command(commands.Cog):
                 if(k[0].strip()==args):
                     t=t.replace(j+"|","")
         if (len(t)==0):
-            y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL" )
+            y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID =" + str(ctx.message.author.id) )
         else:
-            y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
+            y=await conn.fetch("UPDATE USERS SET ITEMS='" +t.strip().replace("'","''") +"' WHERE ID =" str(ctx.message.author.id))
         await conn.close()
         await ctx.send("Thrown!")
+
+    @commands.command()
+    async def remove(self, ctx,args):
+        DATABASE_URL = os.environ['DATABASE_URL']
+        conn = await asyncpg.connect(DATABASE_URL)
+        men=ctx.message.mentions
+        rol=ctx.message.role_mentions
+        if(men):
+            y=await conn.fetch("SELECT items FROM users WHERE id="+str(men.id))
+            t=""
+            for i in y:
+                t=i[0]
+                for j in i[0].split("|"):
+                    k= j.split(":")
+                    if(k[0].strip()==args):
+                        t=t.replace(j+"|","")
+            if (len(t)==0):
+                y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID=" +str(men.id) )
+            else:
+                y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'WHERE ID=" +str(men.id))
+            await conn.close()
+            await ctx.send("Thrown for " +str(men.name))
+        elif:
+            for k in rol.members:
+                y=await conn.fetch("SELECT items FROM users WHERE id="+str(k.id))
+                t=""
+                for i in y:
+                    t=i[0]
+                    for j in i[0].split("|"):
+                        k= j.split(":")
+                        if(k[0].strip()==args):
+                            t=t.replace(j+"|","")
+                if (len(t)==0):
+                    y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID=" +str(k.id) )
+                else:
+                    y=await conn.fetch("UPDATE USERS SET ITEMS='" +t.strip().replace("'","''") +"' WHERE ID=" +str(k.id))
+                await conn.close()
+                await ctx.send("Thrown for " +str(i.name))
+            
 
     @commands.command()
     async def sell(self, ctx,args):
@@ -130,14 +169,14 @@ class User_Command(commands.Cog):
                 if(k[0].strip()==args):
                     t=z.replace(j+"|","")
                     z=t
-                    
         if (len(t)==0):
-            y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL" )
+            y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID =" + str(ctx.message.author.id) )
         else:
-            y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
+            y=await conn.fetch("UPDATE USERS SET ITEMS='" +t.strip().replace("'","''") +"' WHERE ID =" str(ctx.message.author.id))
+
         await conn.close()
         x=discord.Embed(title="Sucess")
-        x.add_field(name="Good Job", value="You have used " + z)
+        .add_field(name="Good Job", value="You have used " + z)
         await ctx.send(embed=x)
 
     @commands.group()
