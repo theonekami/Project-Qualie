@@ -101,8 +101,8 @@ class User_Command(commands.Cog):
         men=ctx.message.mentions
         rol=ctx.message.role_mentions
         if(men):
-            for k in men:
-                y=await conn.fetch("SELECT items FROM users WHERE id="+str(k.id))
+            for v in men:
+                y=await conn.fetch("SELECT items FROM users WHERE id="+str(v.id))
                 t=""
                 for i in y:
                     t=i[0]
@@ -111,14 +111,14 @@ class User_Command(commands.Cog):
                         if(k[0].strip()==args):
                             t=t.replace(j+"|","")
                 if (len(t)==0):
-                    y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID=" +str(k.id) )
+                    y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID=" +str(v.id) )
                 else:
-                    y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'WHERE ID=" +str(k.id))
+                    y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'WHERE ID=" +str(v.id))
                 await conn.close()
                 await ctx.send("Thrown for " +str(men.name))
         else:
-            for k in rol.members:
-                y=await conn.fetch("SELECT items FROM users WHERE id="+str(k.id))
+            for v in rol.members:
+                y=await conn.fetch("SELECT items FROM users WHERE id="+str(v.id))
                 t=""
                 for i in y:
                     t=i[0]
@@ -127,9 +127,9 @@ class User_Command(commands.Cog):
                         if(k[0].strip()==args):
                             t=t.replace(j+"|","")
                 if (len(t)==0):
-                    y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID=" +str(k.id) )
+                    y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID=" +str(v,id) )
                 else:
-                    y=await conn.fetch("UPDATE USERS SET ITEMS='" +t.strip().replace("'","''") +"' WHERE ID=" +str(k.id))
+                    y=await conn.fetch("UPDATE USERS SET ITEMS='" +t.strip().replace("'","''") +"' WHERE ID=" +str(v,id))
                 await conn.close()
                 await ctx.send("Thrown for " +str(i.name))
             
