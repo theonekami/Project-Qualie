@@ -115,7 +115,7 @@ class User_Command(commands.Cog):
                 else:
                     y=await conn.fetch("UPDATE USERS SET ITEMS='" +t.strip().replace("'","''") +"'WHERE ID=" +str(v.id))
                 await conn.close()
-                await ctx.send("Thrown for " +str(men.name))
+                await ctx.send("Thrown for " +str(v.name))
         else:
             for v in rol.members:
                 y=await conn.fetch("SELECT items FROM users WHERE id="+str(v.id))
