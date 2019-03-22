@@ -172,7 +172,7 @@ class User_Command(commands.Cog):
         if (len(t)==0):
             y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID =" + str(ctx.message.author.id) )
         else:
-            y=await conn.fetch("UPDATE USERS SET ITEMS='" +t.strip().replace("'","''") +"' WHERE ID =" str(ctx.message.author.id))
+            y=await conn.fetch("UPDATE USERS SET ITEMS='" +t.strip().replace("'","''") +"' WHERE ID =" +str(ctx.message.author.id))
 
         await conn.close()
         x=discord.Embed(title="Sucess")
