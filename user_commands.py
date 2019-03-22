@@ -176,7 +176,7 @@ class User_Command(commands.Cog):
 
         await conn.close()
         x=discord.Embed(title="Sucess")
-        .add_field(name="Good Job", value="You have used " + z)
+        x.add_field(name="Good Job", value="You have used " + z)
         await ctx.send(embed=x)
 
     @commands.group()
