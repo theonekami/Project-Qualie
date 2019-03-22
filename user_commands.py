@@ -154,7 +154,8 @@ class User_Command(commands.Cog):
         if(men):
             for i in men:
                 x=await conn.fetch("SELECT money FROM users WHERE id="+str(i.id))
-                y=await conn.fetch("UPDATE users SET money ="+ str(int(args)+x[0][0])+" WHERE id=" + str(i.id))
+                y=await conn.fetch("UPDATE users SET money ={0} WHERE id={1}".format(str(int(args)+x[0][0]),str(i.id)))
+                                
 
         elif(rol):
             for i in rol[0].members:
