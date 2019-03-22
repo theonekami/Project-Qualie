@@ -71,7 +71,7 @@ class User_Command(commands.Cog):
                 u=i[2].split("|")
                 for j in u:
                     w+=j+"\n\n"
-            x.add_field(name="Items:", value=str(w),inline=False)
+            x.add_field(name="Items:", value=str(w).replace(":"," : "),inline=False)
             
         await ctx.send(embed=x)
 
