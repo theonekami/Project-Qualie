@@ -44,15 +44,18 @@ class User_Command(commands.Cog):
 
     @commands.command()
     async def inventory(self, ctx):
+        men=ctx.message.author
+        if(len(ctx.message.mentions)):
+            men=ctx.message.mentions[0]
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = await asyncpg.connect(DATABASE_URL)
-        y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
+        y=await conn.fetch("SELECT * FROM users WHERE id="+str(men.id))
         if(len(y) == 0):
             await ctx.send("creating new user")
             await conn.execute("INSERT INTO USERS (id, money, smithing, extraction,smithexp,excexp) VALUES('" + str(ctx.message.author.id)+ "',0,1,1,0,0)")
             y=await conn.fetch("SELECT * FROM users WHERE id="+str(ctx.message.author.id))
         else:
-            await ctx.send("Fetching for " + ctx.message.author.name)
+            await ctx.send("Fetching for " + men.name)
         await conn.close()
 
         for i in y:
