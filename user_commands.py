@@ -110,8 +110,7 @@ class User_Command(commands.Cog):
                     for j in i[0].split("|"):
                         k= j.split(":")
                         if(k[0].strip()==args.strip()):
-
-                if (len(t)==0):
+                if(len(t)==0):
                     y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID=" +str(v.id) )
                 else:
                     y=await conn.fetch("UPDATE USERS SET ITEMS='" +t.strip().replace("'","''") +"'WHERE ID=" +str(v.id))
@@ -127,7 +126,7 @@ class User_Command(commands.Cog):
                         k= j.split(":")
                         if(k[0].strip()==args):
                             t=t.replace(j+"|","")
-                if (len(t)==0):
+                if(len(t)==0):
                     y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID=" +str(v,id) )
                 else:
                     y=await conn.fetch("UPDATE USERS SET ITEMS='" +t.strip().replace("'","''") +"' WHERE ID=" +str(v,id))
@@ -148,8 +147,7 @@ class User_Command(commands.Cog):
                 if(k[0].strip()==args):
                     t=z.replace(j+"|","")
                     z=t
-                    
-        if (len(t)==0):
+        if(len(t)==0):
             y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL" )
         else:
             y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
