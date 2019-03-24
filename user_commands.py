@@ -100,8 +100,7 @@ class User_Command(commands.Cog):
         conn = await asyncpg.connect(DATABASE_URL)
         men=ctx.message.mentions
         rol=ctx.message.role_mentions
-        await ctx.send(men)
-        if(men):
+        if(len(men)):
             for v in men:
                 y=await conn.fetch("SELECT items FROM users WHERE id="+str(v.id))
                 t=""
@@ -109,7 +108,8 @@ class User_Command(commands.Cog):
                     t=i[0]
                     for j in i[0].split("|"):
                         k= j.split(":")
-                        if(k[0].strip()==args):
+                        await ctx.send(k)
+                        if(k[0].strip()==args.strip()):
                             t=t.replace(j+"|","")
                             await ctx.send(t)
                 if (len(t)==0):
