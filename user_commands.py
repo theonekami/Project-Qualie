@@ -110,6 +110,7 @@ class User_Command(commands.Cog):
                         k= j.split(":")
                         if(k[0].strip()==args):
                             t=t.replace(j+"|","")
+                            await ctx.send(t)
                 if (len(t)==0):
                     y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID=" +str(v.id) )
                 else:
