@@ -100,7 +100,6 @@ class User_Command(commands.Cog):
         conn = await asyncpg.connect(DATABASE_URL)
         men=ctx.message.mentions
         rol=ctx.message.role_mentions
-
         if(len(men)):
             for v in men:
                 y=await conn.fetch("SELECT items FROM users WHERE id="+str(v.id))
@@ -126,6 +125,7 @@ class User_Command(commands.Cog):
                         k= j.split(":")
                         if(k[0].strip()==args):
                             t=t.replace(j+"|","")
+                            
                 if(len(t)==0):
                     y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL WHERE ID=" +str(v,id) )
                 else:
@@ -134,27 +134,27 @@ class User_Command(commands.Cog):
                 await ctx.send("Thrown for " +str(i.name))
             
 
-    @commands.command()
-    async def sell(self, ctx,args):
-        DATABASE_URL = os.environ['DATABASE_URL']
-        conn = await asyncpg.connect(DATABASE_URL)
-        y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
-        t=""
-        for i in y:
-            z=i[0]
-            for j in i[0].split("|"):
-                k= j.split(":")
-                if(k[0].strip()==args):
-                    t=z.replace(j+"|","")
-                    z=t
-        if(len(t)==0):
-            y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL" )
-        else:
-            y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
-        await conn.close()
-        x=discord.Embed(title="Sucess")
-        x.add_field(name="Good Job", value="You have used " + z)
-        await ctx.send(embed=x)
+##    @commands.command()
+##    async def sell(self, ctx,args):
+##        DATABASE_URL = os.environ['DATABASE_URL']
+##        conn = await asyncpg.connect(DATABASE_URL)
+##        y=await conn.fetch("SELECT items FROM users WHERE id="+str(ctx.message.author.id))
+##        t=""
+##        for i in y:
+##            z=i[0]
+##            for j in i[0].split("|"):
+##                k= j.split(":")
+##                if(k[0].strip()==args):
+##                    t=z.replace(j+"|","")
+##                    z=t
+##        if(len(t)==0):
+##            y=await conn.fetch("UPDATE USERS SET ITEMS=" +"NULL" )
+##        else:
+##            y=await conn.fetch("UPDATE USERS SET ITEMS='" +t +"'")
+##        await conn.close()
+##        x=discord.Embed(title="Sucess")
+##        x.add_field(name="Good Job", value="You have used " + z)
+##        await ctx.send(embed=x)
 
     @commands.command()
     async def use(self, ctx,*,args):
