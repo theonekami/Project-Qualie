@@ -100,6 +100,7 @@ class User_Command(commands.Cog):
         conn = await asyncpg.connect(DATABASE_URL)
         men=ctx.message.mentions
         rol=ctx.message.role_mentions
+        args=args.split(",")[0]
         await ctx.send(args)
         if(len(men)):
             for v in men:
