@@ -100,6 +100,7 @@ class User_Command(commands.Cog):
         conn = await asyncpg.connect(DATABASE_URL)
         men=ctx.message.mentions
         rol=ctx.message.role_mentions
+        await ctx.send(args)
         if(len(men)):
             for v in men:
                 y=await conn.fetch("SELECT items FROM users WHERE id="+str(v.id))
