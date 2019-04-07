@@ -131,11 +131,13 @@ async def time(ctx):
     a_time=dt-datetime.timedelta(hours=3)
     est=dt-datetime.timedelta(hours=5)
     utc=dt-datetime.timedelta(hours=6)
+    bst=ft+datetime.timedelta(hours=1)
 
     em.add_field(name="GMT",value=dt.strftime("%T || %D"),inline=False)
-    em.add_field(name="AST",value=a_time.strftime("%T || %D"),inline=False)
+    em.add_field(name="AST",valueem.add_field(name="AST",value=a_time.strftime("%T || %D"),inline=False)=a_time.strftime("%T || %D"),inline=False)
     em.add_field(name="EST",value=est.strftime("%T || %D"),inline=False)
     em.add_field(name="CST",value=est.strftime("%T || %D"),inline=False)
+    em.add_field(name="BST",valur=bst.strftime("%T || %D"),inline=False)
 
     await ctx.send(embed=em)
 
