@@ -128,7 +128,7 @@ async def calc(ctx, *, args):
 async def time(ctx):
     em=discord.Embed(title="Time")
     dt=datetime.datetime.now() 
-    a_time=dt-datetime.timedelta(hours=4)
+    a_time=dt-datetime.timedelta(hours=3)
     est=dt-datetime.timedelta(hours=5)
     utc=dt-datetime.timedelta(hours=6)
 
