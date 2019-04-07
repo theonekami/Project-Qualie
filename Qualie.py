@@ -134,7 +134,7 @@ async def time(ctx):
     bst=ft+datetime.timedelta(hours=1)
 
     em.add_field(name="GMT",value=dt.strftime("%T || %D"),inline=False)
-    em.add_field(name="AST",valueem.add_field(name="AST",value=a_time.strftime("%T || %D"),inline=False)=a_time.strftime("%T || %D"),inline=False)
+    em.add_field(name="AST",value=utc.strftime("%T || %D"), inline=False) 
     em.add_field(name="EST",value=est.strftime("%T || %D"),inline=False)
     em.add_field(name="CST",value=est.strftime("%T || %D"),inline=False)
     em.add_field(name="BST",valur=bst.strftime("%T || %D"),inline=False)
