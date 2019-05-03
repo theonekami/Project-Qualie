@@ -71,6 +71,8 @@ class Item_Command(commands.Cog):
 
 
         for i in range(0,len(l1)):
+            print(i)
+            print(len(l1))
             x= discord.Embed(title= "List!")
             for j in l1[i]:
                 x.add_field(name=":gem:"+str(j[2])+ " - "+ j[0],value=j[1], inline=False)
