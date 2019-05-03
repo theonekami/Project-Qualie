@@ -64,9 +64,12 @@ class Item_Command(commands.Cog):
             f+=1;
             if (f>20):
                 f=0
+                await ctx.send(l2)
                 l1.append(l2)
                 l2=[]
+                
             l2.append(i)
+
 
         for i in range(0,len(l1)):
             for j in l2:
