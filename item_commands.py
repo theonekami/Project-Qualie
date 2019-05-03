@@ -34,6 +34,11 @@ def accept(a):
     y=["y","yes","n","no"]
     return a in y
 
+def prevnext(a):
+    a=a.content.lower()
+    s=["n","next","p","prev","e","exit"]
+    return a in s
+
 class Item_Command(commands.Cog):
     def __init__(self, bot):
         self.bot=bot
@@ -53,14 +58,41 @@ class Item_Command(commands.Cog):
         await conn.close()
         x= discord.Embed(title= "List!")
         f=0
+        l1=[]
+        l2=[]
         for i in v:
             f+=1;
             if (f>20):
                 f=0
-                break
-             x.add_field(name=":gem:"+str(i[2])+ " - "+ i[0],value=i[1], inline=False)
-        await ctx.send(embed=x)
+                l1.append(l2)
+                l2=[]
+            l2.append(i)
 
+        for i in range(0,len(l1)):
+            for j in l2:
+                x= discord.Embed(title= "List!")
+                x.add_field(name=":gem:"+str(i[2])+ " - "+ i[0],value=i[1], inline=False)
+            await ctx.send(embed=x)
+            while(True):
+                t= await self.bot.wait_for("message",timeout=120,check=prevnext)
+                if (t.content.lower=="p" or t.content.lower=="prev"):
+                    if i==0:
+                        await ctx.send("Nothing else before this")
+                        continue
+                    else:
+                        i-=2
+                        break
+                elif(t.content.lower="n" or t.content.lower="next"):
+                    if i==(len(l1)-1):
+                        await ctx.send("Nothing else before this")
+                        continue
+                    else:
+                        break
+                else:
+                    i=len(l1)
+                    break
+            
+##            
     @item.command(name="add")
     @commands.check(basic_check)
     async def add_item(self,ctx,*,args):
