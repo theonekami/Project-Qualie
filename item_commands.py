@@ -70,7 +70,7 @@ class Item_Command(commands.Cog):
             l2.append(i)
 
 
-        for i in range(0,len(l1)):
+        for i in range(0,len(l1)+1):
             print(i)
             print(len(l1))
             x= discord.Embed(title= "List!")
@@ -88,7 +88,7 @@ class Item_Command(commands.Cog):
                         break
                 elif(t.content.lower=="n" or t.content.lower=="next"):
                     if i==(len(l1)-1):
-                        await ctx.send("Nothing else before this")
+                        await ctx.send("Nothing else after this")
                         continue
                     else:
                         break
