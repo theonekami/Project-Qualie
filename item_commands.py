@@ -69,6 +69,7 @@ class Item_Command(commands.Cog):
                 
             l2.append(i)
 
+        l1.append(l2)
 
         for i in range(0,len(l1)+1):
             print(i)
