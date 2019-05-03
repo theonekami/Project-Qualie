@@ -71,7 +71,7 @@ class Item_Command(commands.Cog):
 
         l1.append(l2)
 
-        for i in range(0,len(l1)+1):
+        for i in range(0,len(l1)):
             print(i)
             print(len(l1))
             x= discord.Embed(title= "List!")
