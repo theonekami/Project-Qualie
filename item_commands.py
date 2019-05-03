@@ -85,7 +85,7 @@ class Item_Command(commands.Cog):
                         await ctx.send("Nothing else before this")
                         continue
                     else:
-                        i-=2
+                        i=i-2
                         break
                 elif(t.content.lower=="n" or t.content.lower=="next"):
                     if i==(len(l1)-1):
