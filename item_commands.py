@@ -52,7 +52,12 @@ class Item_Command(commands.Cog):
         v= await conn.fetch(ex)
         await conn.close()
         x= discord.Embed(title= "List!")
+        f=0
         for i in v:
+            f+=1;
+            if (f>20):
+                f=0
+                break
              x.add_field(name=":gem:"+str(i[2])+ " - "+ i[0],value=i[1], inline=False)
         await ctx.send(embed=x)
 
