@@ -1,6 +1,6 @@
 asyncpg
 requests
-git+https://github.com/Rapptz/discord.py@rewrite
+discord.py
 openpyxl
 motor
 dnspython
