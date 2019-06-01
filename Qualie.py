@@ -36,13 +36,17 @@ def basic_check(ctx):  ##for funsies
     else:
         return False
 
-
-
-
 home=None 
 
 client=commands.Bot( command_prefix=('!','.', 'q ', 'Q ','Qualie '))
 client.remove_command('help')
+
+
+def make_user(us):
+    return client.fetch_user(id=us)
+
+
+
 
 
 @client.event
